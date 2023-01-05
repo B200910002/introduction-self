@@ -1,0 +1,102 @@
+.container {
+  margin: 0px;
+  padding: 0px;
+}
+.loading {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  margin: 50px auto;
+  background-color: #eeeeee;
+  animation: spin 2s linear infinite;
+  animation-direction: reverse;
+}
+.shape {
+  display: block;
+  position: absolute;
+  height: 20px;
+  width: 40px;
+  background-color: #fff;
+  mix-blend-mode: exclusion;
+  -webkit-backface-visibility: visible;
+  backface-visibility: visible;
+}
+.shape.shape-1 {
+  animation: spin1 2s ease-in-out infinite;
+  animation-fill-mode: forwards;
+}
+.shape.shape-2 {
+  animation: spin2 2s ease-in-out infinite;
+  animation-fill-mode: forwards;
+}
+.shape.shape-3 {
+  animation: spin3 2s ease-in-out infinite;
+  animation-fill-mode: forwards;
+}
+.shape.shape-4 {
+  animation: spin4 2s ease-in-out infinite;
+  animation-fill-mode: forwards;
+}
+.shape.shape-1 {
+  top: 20px;
+  left: 40px;
+}
+.shape.shape-2 {
+  right: 20px;
+  top: 40px;
+  width: 20px;
+  height: 40px;
+}
+.shape.shape-3 {
+  bottom: 20px;
+  left: 40px;
+}
+.shape.shape-4 {
+  left: 20px;
+  top: 40px;
+  width: 20px;
+  height: 40px;
+}
+@keyframes spin {
+  100% {
+    transform: rotate(90deg);
+  }
+}
+@keyframes spin1 {
+  25% {
+    transform: rotate(90deg) translate(30px, -10px) scaleX(1);
+  }
+  100% {
+    transform: rotate(90deg) translate(30px, -10px) scaleX(2);
+  }
+}
+@keyframes spin2 {
+  15% {
+    transform: rotate(0deg) translate(0px) scaleY(1);
+  }
+  50% {
+    transform: rotate(90deg) translate(10px, 30px) scaleY(1);
+  }
+  100% {
+    transform: rotate(90deg) translate(10px, 30px) scaleY(2);
+  }
+}
+@keyframes spin3 {
+  40% {
+    transform: rotate(0deg) translate(0px) scaleX(1);
+  }
+  75% {
+    transform: rotate(90deg) translate(-30px, 10px) scaleX(1);
+  }
+  100% {
+    transform: rotate(90deg) translate(-30px, 10px) scaleX(2);
+  }
+}
+@keyframes spin4 {
+  65% {
+    transform: rotate(0deg) translate(0px) scaleY(1);
+  }
+  100% {
+    transform: rotate(90deg) translate(-10px, -30px) scaleY(2);
+  }
+}
