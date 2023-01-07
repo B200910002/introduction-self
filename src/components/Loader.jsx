@@ -1,11 +1,28 @@
 import React, { Component } from "react";
-import "./Loader.css"
+import "./Loader.css";
+import {} from "../constants/styles";
 
-class Loader extends Component {
+export default class Loader extends Component {
   // constructor(props) {
   //   super(props);
   // }
   // state = {};
+  styles = {
+    container: {
+      margin: "0px",
+      padding: "0px",
+    },
+    loading: {
+      width: "120px",
+      height: "120px",
+      position: "relative",
+      margin: "auto",
+      backgroundColor: "#eeeeee",
+      animation: "spin 2s linear infinite",
+      animationDirection: "reverse",
+      borderRadius: "30px",
+    },
+  };
   render() {
     return (
       <div className="container">
@@ -19,5 +36,3 @@ class Loader extends Component {
     );
   }
 }
-
-export default Loader;

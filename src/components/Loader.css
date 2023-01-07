@@ -6,10 +6,11 @@
   width: 120px;
   height: 120px;
   position: relative;
-  margin: 50px auto;
+  margin: auto;
   background-color: #eeeeee;
   animation: spin 2s linear infinite;
   animation-direction: reverse;
+  border-radius: 30px;
 }
 .shape {
   display: block;

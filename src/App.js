@@ -1,9 +1,10 @@
-import "./App.css";
-import { BrowserRouter, Routes, Route, Outlet, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import NoPage from "./pages/NoPage";
-import Loader from "./components/Loader";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import { Colors } from "./constants/styles";
 
 export default function App() {
   return (
@@ -23,43 +24,19 @@ export default function App() {
 const Layout = () => {
   return (
     <>
-      <div className="grid-container">
-        <div className="grid-item">
-          <Loader />
-        </div>
+      <Header />
+      <div style={styles.container}>
+        <Outlet />
       </div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/blogs">Blogs</Link>
-        </li>
-        <li>
-          <Link to="/contact">Contact</Link>
-        </li>
-      </ul>
-      <Outlet />
-      <Footer />
-      <Footer />
-      <Footer />
-      <Footer />
-      <Footer />
-      <Footer />
-      <Footer />
-      <Footer />
-      <Footer />
-      <Footer />
-      <Footer />
       <Footer />
     </>
   );
 };
 
-const Footer = () => {
-  return (
-    <div>
-      <h1>Footer</h1>
-    </div>
-  );
+const styles = {
+  container: {
+    padding: "50px 7%",
+    fontSize: 24,
+    backgroundColor: Colors.mainContainerBackColor,
+  },
 };
