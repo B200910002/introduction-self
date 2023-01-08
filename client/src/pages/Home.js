@@ -2,6 +2,7 @@ import React from "react";
 import Timer from "../components/Timer";
 import TodoApp from "../components/Todo";
 import { Colors } from "../constants/styles";
+import Ap from "../testContext.js/Ap";
 
 function Home() {
   return (
@@ -12,12 +13,7 @@ function Home() {
       <div style={styles.toDo}>
         <TodoApp />
       </div>
-      <div style={styles.toDo}>
-        <TodoApp />
-      </div>
-      <div style={styles.toDo}>
-        <TodoApp />
-      </div>
+      <Ap />
     </div>
   );
 }
@@ -30,7 +26,7 @@ const styles = {
     color: Colors.whiteColor,
   },
   timer: {
-    textAlign: 'right'
+    textAlign: "right",
   },
 };
 

@@ -23,8 +23,8 @@ export default class Header extends Component {
             </Link>
           </li>
           <li style={styles.li}>
-            <Link style={styles.a} to="/blogs">
-              <p style={Fonts.smallGray}>Blog</p>
+            <Link style={styles.a} to="/blockchain">
+              <p style={Fonts.smallGray}>Blockchain</p>
             </Link>
           </li>
           <li style={styles.li}>

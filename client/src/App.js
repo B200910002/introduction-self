@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Home from "./pages/Home";
+import Blockchain from "./pages/Blockchain";
 import Contact from "./pages/Contact";
 import NoPage from "./pages/NoPage";
 import Header from "./components/Header";
@@ -12,7 +13,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          {/* <Route path="blogs" element={<Blogs />} /> */}
+          <Route path="blockchain" element={<Blockchain />} />
           <Route path="contact" element={<Contact />} />
         </Route>
         <Route path="*" element={<NoPage />} />
