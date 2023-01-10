@@ -9,7 +9,8 @@ export default function Ap() {
   return (
     <div>
       <LoginContext.Provider value={{ username, setUsername, setShowProfile }}>
-        {showProfile ? <Profile /> : <Login />}
+        <Login />
+        {showProfile ? <Profile /> : <></>}
       </LoginContext.Provider>
     </div>
   );

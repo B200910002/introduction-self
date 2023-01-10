@@ -101,7 +101,7 @@ class BlockChain {
     this.chain = [this.createGenBlock()];
     this.difficulty = 2;
     this.pendingTransactions = [];
-    this.miningReward = 0;
+    this.miningReward = 100;
   }
 
   createGenBlock() {
@@ -143,7 +143,7 @@ class BlockChain {
     }
 
     this.pendingTransactions.push(transaction);
-    this.miningReward = this.calcPercent();
+    // this.miningReward = this.calcPercent();
   }
 
   getBalanceOfAddress(address) {

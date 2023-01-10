@@ -3,6 +3,7 @@ import Loader from "./Loader";
 import { Link } from "react-router-dom";
 import { Colors, Fonts } from "../constants/styles";
 import { Images } from "../constants/assets";
+import Timer from "./Timer";
 
 export default class Header extends Component {
   // constructor(props) {
@@ -32,6 +33,9 @@ export default class Header extends Component {
               <p style={Fonts.smallGray}>Contact</p>
             </Link>
           </li>
+          <div style={styles.timer}>
+            <Timer />
+          </div>
         </ul>
       </>
     );
@@ -65,9 +69,12 @@ const styles = {
   },
   a: {
     display: "block",
-    color: Colors.whiteColor,
     textAlign: "center",
     padding: "5px 10px 5px 0",
     textDecoration: "none",
+  },
+  timer: {
+    textAlign: "right",
+    padding: "5px 10px 5px 0",
   },
 };

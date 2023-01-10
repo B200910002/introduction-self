@@ -1,21 +1,21 @@
-import React from "react";
-import Timer from "../components/Timer";
+import React, { Component } from "react";
 import TodoApp from "../components/Todo";
 import { Colors } from "../constants/styles";
-import Ap from "../testContext.js/Ap";
+import Ap from "../testContext/Ap";
+import Ap1 from "../testContextClass/Ap";
 
-function Home() {
-  return (
-    <div>
-      <div style={styles.timer}>
-        <Timer />
+export default class Home extends Component {
+  render() {
+    return (
+      <div>
+        <div style={styles.toDo}>
+          <TodoApp />
+        </div>
+        <Ap />
+        <Ap1 />
       </div>
-      <div style={styles.toDo}>
-        <TodoApp />
-      </div>
-      <Ap />
-    </div>
-  );
+    );
+  }
 }
 
 const styles = {
@@ -29,5 +29,3 @@ const styles = {
     textAlign: "right",
   },
 };
-
-export default Home;
