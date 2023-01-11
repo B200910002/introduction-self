@@ -8,7 +8,6 @@ export class BlockchainProvider extends Component {
     super(props);
     this.state = {
       server: false,
-      showTransactions: false,
       selectedBlockTransactions: [],
       balanceOfAddress: 0,
       blockchain: {
@@ -45,31 +44,20 @@ export class BlockchainProvider extends Component {
   }
 
   componentDidMount() {
-    this.checkServer();
-    this.getBlockChain();
+    this.refreshData();
   }
 
   componentDidUpdate() {
-    this.checkServer();
-    this.getBlockChain();
+    this.refreshData();
   }
 
-  checkServer() {
-    try {
-      axios
-        .get(`http://localhost:9000/api/v1/blockchain/check`)
-        .then((response) => {
-          if (response.status === 200) this.setState({ server: response.data });
-        });
-    } catch (err) {
-      console.log(err.message);
-    }
-  }
-
-  getBlockChain() {
+  refreshData() {
     try {
       axios.get(`http://localhost:9000/api/v1/blockchain/`).then((response) => {
-        this.setState({ blockchain: response.data });
+        if (response.status === 200) {
+          this.setState({ blockchain: response.data });
+          this.setState({ server: true });
+        }
       });
     } catch (err) {
       console.log(err.message);
@@ -111,7 +99,7 @@ export class BlockchainProvider extends Component {
           amount: newTransaction.amount,
         })
         .then((response) => {
-          if (response.status === 200) alert(response.data); 
+          if (response.status === 200) alert(response.data);
           else console.log("pezdaa");
         });
     } catch (err) {
@@ -133,15 +121,11 @@ export class BlockchainProvider extends Component {
   }
 
   render() {
-    const { server, blockchain, selectedBlockTransactions, showTransactions } =
-      this.state;
+    const { server, blockchain, selectedBlockTransactions } = this.state;
     const { createTransaction, createBlock } = this;
 
     let setSelectedBlockTransactions = (selectedBlock) => {
       this.setState({ selectedBlockTransactions: selectedBlock });
-    };
-    let setShowTransactions = () => {
-      this.setState({ showTransactions: true });
     };
 
     return (
@@ -150,8 +134,6 @@ export class BlockchainProvider extends Component {
           server,
           blockchain,
           selectedBlockTransactions,
-          showTransactions,
-          setShowTransactions,
           setSelectedBlockTransactions,
           createTransaction,
           createBlock,

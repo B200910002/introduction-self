@@ -7,12 +7,9 @@ export default class Block extends Component {
     super(props);
     this.state = { blocks: [], block: {} };
   }
-
   static contextType = BlockchainContext;
-
   render() {
-    const { blockchain, setSelectedBlockTransactions, setShowTransactions } =
-      this.context;
+    const { blockchain, setSelectedBlockTransactions } = this.context;
     return (
       <div style={styles.container}>
         <p style={Fonts.largeGray}>Blocks</p>
@@ -31,7 +28,6 @@ export default class Block extends Component {
                 <p>timestamp: {block.timestamp}</p>
                 <button
                   onClick={() => {
-                    setShowTransactions();
                     setSelectedBlockTransactions(block.transactions);
                   }}
                 >

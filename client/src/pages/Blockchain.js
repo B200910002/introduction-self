@@ -27,7 +27,7 @@ class BlockchainChild extends Component {
   }
   static contextType = BlockchainContext;
   render() {
-    const { server, showTransactions } = this.context;
+    const { server } = this.context;
     return (
       <>
         {server ? (
@@ -35,7 +35,7 @@ class BlockchainChild extends Component {
             <CreateTransaction />
             <PendingTransactions />
             <Block />
-            {showTransactions ? <Transaction /> : <></>}
+            <Transaction />
           </>
         ) : (
           <>

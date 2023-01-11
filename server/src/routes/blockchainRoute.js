@@ -3,7 +3,6 @@ const router = express.Router();
 const blockchainCtrl = require("../controllers/blockchainCtrl");
 
 //
-router.get("/check", blockchainCtrl.checkServer);
 router.get("/", blockchainCtrl.initialize);
 router.get("/blocks", blockchainCtrl.getAllBlocks);
 
