@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BlockchainContext, BlockchainProvider } from "../context/Context";
+import { Fonts } from "../constants/styles";
 import Block from "../components/blockchain/Blocks";
 import Transaction from "../components/blockchain/Transactions";
 import CreateTransaction from "../components/blockchain/CreateTransaction";
@@ -26,13 +27,21 @@ class BlockchainChild extends Component {
   }
   static contextType = BlockchainContext;
   render() {
-    const { showTransactions } = this.context;
+    const { server, showTransactions } = this.context;
     return (
       <>
-        <CreateTransaction />
-        <PendingTransactions />
-        <Block />
-        {showTransactions ? <Transaction /> : <></>}
+        {server ? (
+          <>
+            <CreateTransaction />
+            <PendingTransactions />
+            <Block />
+            {showTransactions ? <Transaction /> : <></>}
+          </>
+        ) : (
+          <>
+            <p style={Fonts.normalGray}>Block chain server has turn off!</p>
+          </>
+        )}
       </>
     );
   }

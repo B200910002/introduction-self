@@ -14,49 +14,40 @@ export default class Block extends Component {
     const { blockchain, setSelectedBlockTransactions, setShowTransactions } =
       this.context;
     return (
-      <>
-        {blockchain.chain.length !== 1 ? (
-          <div style={styles.container}>
-            <p style={Fonts.largeGray}>Blocks</p>
-            <p style={Fonts.smallGrayItalic}>
-              Each card represents a block on the chain. Click on a block to see
-              the transactions stored inside.
-            </p>
-            <div style={styles.gridContainer}>
-              {blockchain.chain.map((block) => (
-                <div style={styles.block} key={block.hash}>
-                  <p>BLock </p>
-                  <p>hash: {block.hash}</p>
-                  <p>previos hash: {block.previosHash}</p>
-                  <p>nonce: {block.nonce}</p>
-                  <p>timestamp: {block.timestamp}</p>
-                  <button
-                    onClick={() => {
-                      setShowTransactions();
-                      setSelectedBlockTransactions(block.transactions);
-                    }}
-                  >
-                    See transactions
-                  </button>
-                </div>
-              ))}
+      <div style={styles.container}>
+        <p style={Fonts.largeGray}>Blocks</p>
+        <p style={Fonts.smallGrayItalic}>
+          Each card represents a block on the chain. Click on a block to see the
+          transactions stored inside.
+        </p>
+        <div style={styles.gridContainer}>
+          {blockchain.chain.map((block) => (
+            <div style={styles.block} key={block.hash}>
+              <div style={Fonts.smallGray}>
+                <p>BLock </p>
+                <p>hash: {block.hash}</p>
+                <p>previos hash: {block.previosHash}</p>
+                <p>nonce: {block.nonce}</p>
+                <p>timestamp: {block.timestamp}</p>
+                <button
+                  onClick={() => {
+                    setShowTransactions();
+                    setSelectedBlockTransactions(block.transactions);
+                  }}
+                >
+                  See transactions
+                </button>
+              </div>
             </div>
-          </div>
-        ) : (
-          <>
-            <p style={Fonts.normalGray}>Block chain server has turn off!</p>
-          </>
-        )}
-      </>
+          ))}
+        </div>
+      </div>
     );
   }
 }
 
 const styles = {
-  container: {
-    fontSize: "12px",
-    color: Colors.grayColor,
-  },
+  container: {},
   gridContainer: {
     display: "grid",
     gridTemplateColumns: "auto auto auto auto",

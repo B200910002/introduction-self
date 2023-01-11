@@ -17,6 +17,15 @@ exports.initialize = async (req, res, next) => {
   }
 };
 
+exports.checkServer = async (req, res, next) => {
+  try {
+    res.status(200).json(true);
+  } catch (err) {
+    // next(err);
+    res.status(201).json(err.message);
+  }
+};
+
 exports.getAllBlocks = async (req, res, next) => {
   try {
     res.status(200).json(coin.chain);

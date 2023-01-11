@@ -7,6 +7,7 @@ export class BlockchainProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      server: false,
       showTransactions: false,
       selectedBlockTransactions: [],
       balanceOfAddress: 0,
@@ -20,6 +21,7 @@ export class BlockchainProvider extends Component {
                 toAddress: "",
                 amount: 0,
                 signature: "",
+                timestamp: 0,
               },
             ],
             previosHash: "",
@@ -34,6 +36,7 @@ export class BlockchainProvider extends Component {
             toAddress: "",
             amount: 0,
             signature: "",
+            timestamp: 0,
           },
         ],
         miningReward: 0,
@@ -42,7 +45,25 @@ export class BlockchainProvider extends Component {
   }
 
   componentDidMount() {
+    this.checkServer();
     this.getBlockChain();
+  }
+
+  componentDidUpdate() {
+    this.checkServer();
+    this.getBlockChain();
+  }
+
+  checkServer() {
+    try {
+      axios
+        .get(`http://localhost:9000/api/v1/blockchain/check`)
+        .then((response) => {
+          if (response.status === 200) this.setState({ server: response.data });
+        });
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 
   getBlockChain() {
@@ -81,19 +102,28 @@ export class BlockchainProvider extends Component {
     }
   }
 
-  async createTransaction(newTransaction) {
+  createTransaction(newTransaction) {
     try {
-      await axios
+      axios
         .post(`http://localhost:9000/api/v1/blockchain/create/transaction`, {
           fromAddress: newTransaction.fromAddress,
           toAddress: newTransaction.toAddress,
           amount: newTransaction.amount,
         })
         .then((response) => {
-          //   if (response.status === 200) alert();
-          //   else
-          //   console.log(fromAddress, toAddress, amount);
-          //   alert(response.data);
+          if (response.status === 200) alert(response.data); 
+          else console.log("pezdaa");
+        });
+    } catch (err) {
+      console.log(err.massage);
+    }
+  }
+
+  createBlock() {
+    try {
+      axios
+        .post(`http://localhost:9000/api/v1/blockchain/create/block`)
+        .then((response) => {
           if (response.status === 200) alert(response.data);
           else console.log("pezdaa");
         });
@@ -103,9 +133,9 @@ export class BlockchainProvider extends Component {
   }
 
   render() {
-    const { blockchain, selectedBlockTransactions, showTransactions } =
+    const { server, blockchain, selectedBlockTransactions, showTransactions } =
       this.state;
-    const { createTransaction } = this;
+    const { createTransaction, createBlock } = this;
 
     let setSelectedBlockTransactions = (selectedBlock) => {
       this.setState({ selectedBlockTransactions: selectedBlock });
@@ -117,12 +147,14 @@ export class BlockchainProvider extends Component {
     return (
       <BlockchainContext.Provider
         value={{
+          server,
           blockchain,
           selectedBlockTransactions,
           showTransactions,
-          createTransaction,
           setShowTransactions,
           setSelectedBlockTransactions,
+          createTransaction,
+          createBlock,
         }}
       >
         {this.props.children}

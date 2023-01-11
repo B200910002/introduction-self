@@ -41,7 +41,7 @@ export default class CreateTransaction extends Component {
             <FormLabel style={Fonts.smallGray}>To address</FormLabel>
             <FormControl
               type="text"
-              name="fromAddress"
+              name="toAddress"
               placeholder="to address"
               onChange={(event) => {
                 this.setState({ toAddress: event.target.value });
@@ -53,7 +53,7 @@ export default class CreateTransaction extends Component {
             <FormLabel style={Fonts.smallGray}>Amount</FormLabel>
             <FormControl
               type="number"
-              name="fromAddress"
+              name="amount"
               placeholder="amount"
               onChange={(event) => {
                 this.setState({ amount: Number(event.target.value) });
@@ -64,9 +64,8 @@ export default class CreateTransaction extends Component {
           <FormGroup>
             <Button
               type="submit"
-              onClick={() => {
+              onClick={(event) => {
                 createTransaction(this.state);
-                console.log(this.state);
               }}
             >
               Sign & create transaction
