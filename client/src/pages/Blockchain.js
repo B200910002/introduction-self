@@ -1,89 +1,39 @@
 import React, { Component } from "react";
-import { BlockchainContext } from "../context/Context";
-import Block from "../components/blockchain/Block";
-import Transaction from "../components/blockchain/Transaction";
-import axios from "axios";
+import { BlockchainContext, BlockchainProvider } from "../context/Context";
+import Block from "../components/blockchain/Blocks";
+import Transaction from "../components/blockchain/Transactions";
+import CreateTransaction from "../components/blockchain/CreateTransaction";
+import PendingTransactions from "../components/blockchain/PendingTransactions";
 
 export default class Blockchain extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showTransactions: false,
-      selectedBlockTransactions: [
-        {
-          fromAddress: "",
-          toAddress: "",
-          amount: 0,
-          signature: "",
-        },
-      ],
-      blockchain: {
-        chain: [
-          {
-            timestamp: 0,
-            transactions: [
-              {
-                fromAddress: "",
-                toAddress: "",
-                amount: 0,
-                signature: "",
-              },
-            ],
-            previosHash: "",
-            hash: "",
-            nonce: 0,
-          },
-        ],
-        difficulty: 0,
-        pendingTransactions: [
-          {
-            fromAddress: "",
-            toAddress: "",
-            amount: 0,
-            signature: "",
-          },
-        ],
-        miningReward: 0,
-      },
-    };
+    this.state = {};
   }
-
-  componentDidMount() {
-    this.refreshData();
-  }
-
-  // componentDidUpdate() {
-  //   this.refreshData();
-  // }
-
-  refreshData() {
-    axios.get(`http://localhost:9000/api/v1/blockchain/`).then((response) => {
-      this.setState({ blockchain: response.data });
-    });
-  }
-
   render() {
-    const { blockchain, selectedBlockTransactions, showTransactions } =
-      this.state;
-    let setSelectedBlockTransactions = (selectedBlock) => {
-      this.setState({ selectedBlockTransactions: selectedBlock });
-    };
-    let setShowTransactions = () => {
-      this.setState({ showTransactions: true });
-    };
-
     return (
-      <BlockchainContext.Provider
-        value={{
-          blockchain,
-          selectedBlockTransactions,
-          setShowTransactions,
-          setSelectedBlockTransactions,
-        }}
-      >
+      <BlockchainProvider>
+        <BlockchainChild />
+      </BlockchainProvider>
+    );
+  }
+}
+
+class BlockchainChild extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  static contextType = BlockchainContext;
+  render() {
+    const { showTransactions } = this.context;
+    return (
+      <>
+        <CreateTransaction />
+        <PendingTransactions />
         <Block />
         {showTransactions ? <Transaction /> : <></>}
-      </BlockchainContext.Provider>
+      </>
     );
   }
 }

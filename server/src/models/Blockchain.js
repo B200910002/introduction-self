@@ -7,10 +7,13 @@ class Transaction {
     this.fromAddress = fromAddress;
     this.toAddress = toAddress;
     this.amount = amount;
+    this.timestamp = Date.now();
   }
 
   calcHash() {
-    return SHA256(this.fromAddress + this.toAddress + this.amount).toString();
+    return SHA256(
+      this.fromAddress + this.toAddress + this.amount + this.timestamp
+    ).toString();
   }
 
   signTransaction(signingKey) {
@@ -18,7 +21,7 @@ class Transaction {
       throw new Error("You cannot sign transactions for other wallets!");
     }
 
-    if (this.fromAddress === this.toAddress){
+    if (this.fromAddress === this.toAddress) {
       throw new Error("You cannot transactions for our wallet!");
     }
 
@@ -87,11 +90,11 @@ class Block {
 
   hasValidTransactions() {
     for (const tx of this.transactions) {
+      console.log(tx.isValid());
       if (!tx.isValid()) {
         return false;
       }
     }
-
     return true;
   }
 }

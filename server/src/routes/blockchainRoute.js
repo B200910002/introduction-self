@@ -4,6 +4,7 @@ const blockchainCtrl = require("../controllers/blockchainCtrl");
 
 //get
 router.get("/", blockchainCtrl.initialize);
+router.get("/blocks", blockchainCtrl.getAllBlocks)
 
 // post
 router.post("/create/transaction", blockchainCtrl.createNewTransaction);

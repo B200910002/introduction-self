@@ -17,6 +17,15 @@ exports.initialize = async (req, res, next) => {
   }
 };
 
+exports.getAllBlocks = async (req, res, next) => {
+  try {
+    res.status(200).json(coin.chain);
+  } catch (err) {
+    // next(err);
+    res.status(201).json(err.message);
+  }
+};
+
 exports.createNewTransaction = async (req, res, next) => {
   try {
     const { fromAddress, toAddress, amount } = req.body;
@@ -45,7 +54,7 @@ exports.createNewBlock = async (req, res, next) => {
       .status(200)
       .json("block mine successfully!" + coin.getBalanceOfAddress(myWallet));
   } catch (err) {
-    // next(err);
+    next(err);
     res.status(201).json(err.message);
   }
 };
