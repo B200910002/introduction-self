@@ -12,7 +12,7 @@ export default class Transaction extends Component {
   static contextType = BlockchainContext;
 
   render() {
-    const { selectedBlockTransactions } = this.context;
+    const { selectedBlockTransactions, getBalanceOfAddress } = this.context;
 
     return (
       <div style={styles.container}>
@@ -41,7 +41,16 @@ export default class Transaction extends Component {
                         <p>System</p>
                       )}
                     </td>
-                    <td>{transaction.toAddress.slice(0, 40)}</td>
+                    <td>
+                      <p
+                        onClick={() => {
+                          getBalanceOfAddress(transaction.toAddress);
+                        }}
+                      >
+                        {" "}
+                        {transaction.toAddress.slice(0, 40)}
+                      </p>
+                    </td>
                     <td>{transaction.amount}</td>
                     <td>
                       {transaction.timestamp}{" "}

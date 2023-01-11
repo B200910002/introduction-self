@@ -145,6 +145,11 @@ class BlockChain {
       throw new Error("Cannot add invalid transaction to chain");
     }
 
+    const walletBalance = this.getBalanceOfAddress(transaction.fromAddress);
+    if (walletBalance < transaction.amount) {
+      throw new Error("Not enough balance");
+    }
+
     this.pendingTransactions.push(transaction);
     // this.miningReward = this.calcPercent();
   }

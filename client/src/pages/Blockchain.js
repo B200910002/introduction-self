@@ -5,6 +5,7 @@ import Block from "../components/blockchain/Blocks";
 import Transaction from "../components/blockchain/Transactions";
 import CreateTransaction from "../components/blockchain/CreateTransaction";
 import PendingTransactions from "../components/blockchain/PendingTransactions";
+import BalanceOffAddress from "../components/blockchain/BalanceOfAddress";
 
 export default class Blockchain extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class BlockchainChild extends Component {
             <PendingTransactions />
             <Block />
             <Transaction />
+            <BalanceOffAddress />
           </>
         ) : (
           <>

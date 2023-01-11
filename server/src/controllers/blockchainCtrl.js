@@ -50,11 +50,9 @@ exports.createNewTransaction = async (req, res, next) => {
 exports.createNewBlock = async (req, res, next) => {
   try {
     coin.minePendingTransactions(myWallet);
-    res
-      .status(200)
-      .json("block mine successfully!" + coin.getBalanceOfAddress(myWallet));
+    res.status(200).json("block mine successfully!");
   } catch (err) {
-    next(err);
+    // next(err);
     res.status(201).json(err.message);
   }
 };
@@ -81,10 +79,10 @@ exports.getBalanceOfAddress = async (req, res, next) => {
   try {
     const { address } = req.body;
 
-    const key = ec.keyFromPrivate(address);
-    const wallet = key.getPublic("hex");
+    // const key = ec.keyFromPrivate(address);
+    // const wallet = key.getPublic("hex");
 
-    const balance = coin.getBalanceOfAddress(wallet);
+    const balance = coin.getBalanceOfAddress(address);
 
     res.status(200).json(balance);
   } catch (err) {

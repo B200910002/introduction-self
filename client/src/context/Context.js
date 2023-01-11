@@ -9,7 +9,7 @@ export class BlockchainProvider extends Component {
     this.state = {
       server: false,
       selectedBlockTransactions: [],
-      balanceOfAddress: 0,
+      wallet: {},
       blockchain: {
         chain: [
           {
@@ -76,19 +76,21 @@ export class BlockchainProvider extends Component {
     }
   }
 
-  getBalanceOfAddress(address) {
+  getBalanceOfAddress = (address) => {
     try {
       axios
         .post(`http://localhost:9000/api/v1/blockchain/getBalanceOfAddress`, {
           address: address,
         })
         .then((response) => {
-          this.setState({ balanceOfAddress: response.data });
+          this.setState({
+            wallet: { address: address, balance: response.data },
+          });
         });
     } catch (err) {
       console.log(err.message);
     }
-  }
+  };
 
   createTransaction(newTransaction) {
     try {
@@ -100,7 +102,7 @@ export class BlockchainProvider extends Component {
         })
         .then((response) => {
           if (response.status === 200) alert(response.data);
-          else console.log("pezdaa");
+          else alert(response.data);
         });
     } catch (err) {
       console.log(err.massage);
@@ -121,8 +123,9 @@ export class BlockchainProvider extends Component {
   }
 
   render() {
-    const { server, blockchain, selectedBlockTransactions } = this.state;
-    const { createTransaction, createBlock } = this;
+    const { server, blockchain, selectedBlockTransactions, wallet } =
+      this.state;
+    const { createTransaction, createBlock, getBalanceOfAddress } = this;
 
     let setSelectedBlockTransactions = (selectedBlock) => {
       this.setState({ selectedBlockTransactions: selectedBlock });
@@ -137,6 +140,8 @@ export class BlockchainProvider extends Component {
           setSelectedBlockTransactions,
           createTransaction,
           createBlock,
+          wallet,
+          getBalanceOfAddress,
         }}
       >
         {this.props.children}
