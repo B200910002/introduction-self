@@ -1,5 +1,12 @@
-import { createContext, Component } from "react";
+import React, { createContext, Component } from "react";
 import axios from "axios";
+import {
+  BLOCKCHAIN_BASE_URL,
+  BLOCKCHAIN_BALANCE_URL,
+  BLOCKCHAIN_BLOCKS_URL,
+  BLOCKCHAIN_CREATE_TRANSACTION_URL,
+  BLOCKCHAIN_CREATE_BLOCK_URL,
+} from "../constants/config";
 
 export const BlockchainContext = createContext({});
 
@@ -53,7 +60,7 @@ export class BlockchainProvider extends Component {
 
   refreshData = () => {
     try {
-      axios.get(`http://localhost:9000/api/v1/blockchain/`).then((response) => {
+      axios.get(BLOCKCHAIN_BASE_URL).then((response) => {
         if (response.status === 200) {
           this.setState({ blockchain: response.data });
           this.setState({ server: true });
@@ -66,11 +73,9 @@ export class BlockchainProvider extends Component {
 
   getAllBlocks = () => {
     try {
-      axios
-        .get(`http://localhost:9000/api/v1/blockchain/blocks`)
-        .then((response) => {
-          this.setState({});
-        });
+      axios.get(BLOCKCHAIN_BLOCKS_URL).then((response) => {
+        this.setState({});
+      });
     } catch (err) {
       console.log(err.message);
     }
@@ -79,7 +84,7 @@ export class BlockchainProvider extends Component {
   getBalanceOfAddress = (address) => {
     try {
       axios
-        .post(`http://localhost:9000/api/v1/blockchain/getBalanceOfAddress`, {
+        .post(BLOCKCHAIN_BALANCE_URL, {
           address: address,
         })
         .then((response) => {
@@ -95,7 +100,7 @@ export class BlockchainProvider extends Component {
   createTransaction = (newTransaction) => {
     try {
       axios
-        .post(`http://localhost:9000/api/v1/blockchain/create/transaction`, {
+        .post(BLOCKCHAIN_CREATE_TRANSACTION_URL, {
           fromAddress: newTransaction.fromAddress,
           toAddress: newTransaction.toAddress,
           amount: newTransaction.amount,
@@ -111,12 +116,10 @@ export class BlockchainProvider extends Component {
 
   createBlock = () => {
     try {
-      axios
-        .post(`http://localhost:9000/api/v1/blockchain/create/block`)
-        .then((response) => {
-          if (response.status === 200) alert(response.data);
-          else console.log("pezdaa");
-        });
+      axios.post(BLOCKCHAIN_CREATE_BLOCK_URL).then((response) => {
+        if (response.status === 200) alert(response.data);
+        else console.log("pezdaa");
+      });
     } catch (err) {
       console.log(err.massage);
     }

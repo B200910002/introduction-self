@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Colors, Fonts } from "../../constants/styles";
-import { BlockchainContext } from "../../context/Context";
+import { BlockchainContext } from "../../context/BlockchainContext";
 
 export default class Block extends Component {
   constructor(props) {

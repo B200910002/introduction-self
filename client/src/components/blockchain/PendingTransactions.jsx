@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Colors, Fonts } from "../../constants/styles";
 import { Table, Button } from "react-bootstrap";
-import { BlockchainContext } from "../../context/Context";
+import { BlockchainContext } from "../../context/BlockchainContext";
 
 export default class PendingTransactions extends Component {
   // constructor(props) {

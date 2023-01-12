@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {
   BlockchainContext,
   // BlockchainProvider
-} from "../context/Context";
+} from "../context/BlockchainContext";
 import { Fonts } from "../constants/styles";
 import Block from "../components/blockchain/Blocks";
 import Transaction from "../components/blockchain/Transactions";

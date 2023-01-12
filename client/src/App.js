@@ -1,49 +1,64 @@
+import React, { useContext } from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+
 import { Colors } from "./constants/styles";
-import { BlockchainProvider } from "./context/Context";
+import { AuthProvider, AuthContext } from "./context/AuthContext";
+import { BlockchainProvider } from "./context/BlockchainContext";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import BalanceOffAddress from "./components/blockchain/BalanceOfAddress";
 
+import Login from "./pages/Login";
 import Home from "./pages/Home";
-import Blockchain from "./pages/Blockchain";
 import Contact from "./pages/Contact";
+import Blockchain from "./pages/Blockchain";
 import NoPage from "./pages/NoPage";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route
-            path="blockchain"
-            element={
-              <BlockchainProvider>
-                <Outlet />
-              </BlockchainProvider>
-            }
-          >
-            <Route index element={<Blockchain />} />
-            <Route path="wallet" element={<BalanceOffAddress />} />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="contact" element={<Contact />} />
+            <Route
+              path="blockchain"
+              element={
+                <BlockchainProvider>
+                  <Outlet />
+                </BlockchainProvider>
+              }
+            >
+              <Route index element={<Blockchain />} />
+              <Route path="wallet" element={<BalanceOffAddress />} />
+            </Route>
           </Route>
-          <Route path="contact" element={<Contact />} />
-        </Route>
-        <Route path="*" element={<NoPage />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path="*" element={<NoPage />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
 const Layout = () => {
+  const { isAuthentication } = useContext(AuthContext);
+  console.log("authentication: ",isAuthentication);
   return (
     <>
-      <Header />
-      <div style={styles.container}>
-        <Outlet />
-      </div>
-      <Footer />
+      {isAuthentication ? (
+        <>
+          <Header />
+          <div style={styles.container}>
+            <Outlet />
+          </div>
+          <Footer />
+        </>
+      ) : (
+        <></>
+      )}
     </>
   );
 };

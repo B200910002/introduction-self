@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Fonts } from "../../constants/styles";
-import { BlockchainContext } from "../../context/Context";
+import { BlockchainContext } from "../../context/BlockchainContext";
 // import Transaction from "./Transactions";
 
 export default class BalanceOffAddress extends Component {

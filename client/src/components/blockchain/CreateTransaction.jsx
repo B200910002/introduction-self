@@ -7,7 +7,7 @@ import {
   FormLabel,
   FormControl,
 } from "react-bootstrap";
-import { BlockchainContext } from "../../context/Context";
+import { BlockchainContext } from "../../context/BlockchainContext";
 
 export default class CreateTransaction extends Component {
   constructor(props) {

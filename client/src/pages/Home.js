@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import TodoApp from "../components/Todo";
 import { Colors } from "../constants/styles";
-import Ap from "../testContext/Ap";
-import Ap1 from "../testContextClass/Ap";
+import Ap from "../testContextClass/Ap";
 
 export default class Home extends Component {
   render() {
@@ -12,7 +11,6 @@ export default class Home extends Component {
           <TodoApp />
         </div>
         <Ap />
-        <Ap1 />
       </div>
     );
   }
