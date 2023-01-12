@@ -24,13 +24,13 @@ export default class Header extends Component {
             </Link>
           </li>
           <li style={styles.li}>
-            <Link style={styles.a} to="/blockchain">
-              <p style={Fonts.smallGray}>Blockchain</p>
-            </Link>
-          </li>
-          <li style={styles.li}>
             <Link style={styles.a} to="/contact">
               <p style={Fonts.smallGray}>Contact</p>
+            </Link>
+          </li>{" "}
+          <li style={styles.li}>
+            <Link style={styles.a} to="/blockchain">
+              <p style={Fonts.smallGray}>Blockchain</p>
             </Link>
           </li>
           <div style={styles.timer}>

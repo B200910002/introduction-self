@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Colors, Fonts } from "../../constants/styles";
 import { BlockchainContext } from "../../context/Context";
 import { Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default class Transaction extends Component {
   constructor(props) {
@@ -42,14 +43,16 @@ export default class Transaction extends Component {
                       )}
                     </td>
                     <td>
-                      <p
+                      <Link
+                        to="wallet"
+                        // style={styles.address}
                         onClick={() => {
                           getBalanceOfAddress(transaction.toAddress);
                         }}
                       >
                         {" "}
                         {transaction.toAddress.slice(0, 40)}
-                      </p>
+                      </Link>
                     </td>
                     <td>{transaction.amount}</td>
                     <td>
@@ -81,5 +84,14 @@ const styles = {
   },
   timestamp: {
     fontSize: "10px",
+  },
+  address: {
+    border: "none",
+    background: "none",
+    cursor: "pointer",
+    margin: "0",
+    padding: "0",
+    color: Colors.whiteColor,
+    textDecoration: "underline",
   },
 };

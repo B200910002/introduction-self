@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import { BlockchainContext, BlockchainProvider } from "../context/Context";
+import {
+  BlockchainContext,
+  // BlockchainProvider
+} from "../context/Context";
 import { Fonts } from "../constants/styles";
 import Block from "../components/blockchain/Blocks";
 import Transaction from "../components/blockchain/Transactions";
@@ -14,9 +17,9 @@ export default class Blockchain extends Component {
   }
   render() {
     return (
-      <BlockchainProvider>
-        <BlockchainChild />
-      </BlockchainProvider>
+      // <BlockchainProvider>
+      <BlockchainChild />
+      // </BlockchainProvider>
     );
   }
 }

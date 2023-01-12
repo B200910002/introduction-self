@@ -43,15 +43,15 @@ export class BlockchainProvider extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.refreshData();
-  }
+  };
 
-  componentDidUpdate() {
+  componentDidUpdate = () => {
     this.refreshData();
-  }
+  };
 
-  refreshData() {
+  refreshData = () => {
     try {
       axios.get(`http://localhost:9000/api/v1/blockchain/`).then((response) => {
         if (response.status === 200) {
@@ -62,9 +62,9 @@ export class BlockchainProvider extends Component {
     } catch (err) {
       console.log(err.message);
     }
-  }
+  };
 
-  getAllBlocks() {
+  getAllBlocks = () => {
     try {
       axios
         .get(`http://localhost:9000/api/v1/blockchain/blocks`)
@@ -74,7 +74,7 @@ export class BlockchainProvider extends Component {
     } catch (err) {
       console.log(err.message);
     }
-  }
+  };
 
   getBalanceOfAddress = (address) => {
     try {
@@ -92,7 +92,7 @@ export class BlockchainProvider extends Component {
     }
   };
 
-  createTransaction(newTransaction) {
+  createTransaction = (newTransaction) => {
     try {
       axios
         .post(`http://localhost:9000/api/v1/blockchain/create/transaction`, {
@@ -107,9 +107,9 @@ export class BlockchainProvider extends Component {
     } catch (err) {
       console.log(err.massage);
     }
-  }
+  };
 
-  createBlock() {
+  createBlock = () => {
     try {
       axios
         .post(`http://localhost:9000/api/v1/blockchain/create/block`)
@@ -120,7 +120,7 @@ export class BlockchainProvider extends Component {
     } catch (err) {
       console.log(err.massage);
     }
-  }
+  };
 
   render() {
     const { server, blockchain, selectedBlockTransactions, wallet } =

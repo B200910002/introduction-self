@@ -1,11 +1,15 @@
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import { Colors } from "./constants/styles";
+import { BlockchainProvider } from "./context/Context";
+
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import BalanceOffAddress from "./components/blockchain/BalanceOfAddress";
+
 import Home from "./pages/Home";
 import Blockchain from "./pages/Blockchain";
 import Contact from "./pages/Contact";
 import NoPage from "./pages/NoPage";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import { Colors } from "./constants/styles";
 
 export default function App() {
   return (
@@ -13,7 +17,17 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="blockchain" element={<Blockchain />} />
+          <Route
+            path="blockchain"
+            element={
+              <BlockchainProvider>
+                <Outlet />
+              </BlockchainProvider>
+            }
+          >
+            <Route index element={<Blockchain />} />
+            <Route path="wallet" element={<BalanceOffAddress />} />
+          </Route>
           <Route path="contact" element={<Contact />} />
         </Route>
         <Route path="*" element={<NoPage />} />

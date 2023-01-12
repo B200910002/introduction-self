@@ -14,13 +14,7 @@ class Footer extends Component {
             <div className="col-sm-12 col-md-8">
               <h6>About</h6>
               <p className="tj">
-                Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative
-                to help the upcoming programmers with the code. Scanfcode
-                focuses on providing the most efficient code or snippets as the
-                code wants to be simple. We will help programmers build up
-                concepts in different programming languages that include C, C++,
-                Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL and
-                Algorithm.
+              Coin uses peer-to-peer technology to operate with no central authority or banks; managing transactions and the issuing of coins is carried out collectively by the network. Coin is open-source; its design is public, nobody owns or controls coin and everyone can take part. Through many of its unique properties, coin allows exciting uses that could not be covered by any previous payment system.
               </p>
             </div>
 
@@ -47,13 +41,13 @@ class Footer extends Component {
               <h6>Quick Links</h6>
               <ul className="footer-links">
                 <li>
-                  <a href="http://scanfcode.com/about/">Home</a>
+                  <a href="/">Home</a>
                 </li>
                 <li>
-                  <a href="http://scanfcode.com/contact/">Contact Us</a>
+                  <a href="/contact">Contact Us</a>
                 </li>
                 <li>
-                  <a href="http://scanfcode.com/privacy-policy/">Blockchain</a>
+                  <a href="/blockchain">Blockchain</a>
                 </li>
               </ul>
             </div>

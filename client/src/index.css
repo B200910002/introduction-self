@@ -18,12 +18,12 @@ p {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
   background: #101318;
 }
 ::-webkit-scrollbar-thumb {
   background: #2b3245;
-  border-radius: 5px;
+  border-radius: 4px;
 }
