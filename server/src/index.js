@@ -5,7 +5,7 @@ const cors = require("cors");
 const fileUpload = require("express-fileupload");
 
 //api
-const API = require("./const/api/Api");
+const API = require("./constants/api/Api");
 
 //routes
 const userRoute = require("./routes/blockchainRoute");
