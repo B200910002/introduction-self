@@ -1,7 +1,7 @@
 export const BASE_URL = `http://localhost:9000/api/v1`;
 
-export const LOGIN_URL = ``;
-export const LOGOUT_URL = ``;
+export const LOGIN_URL = `htpp://localhost:8080/login`;
+export const LOGOUT_URL = `htpp://localhost:8080/logout`;
 
 export const BLOCKCHAIN_BASE_URL = `${BASE_URL}/blockchain`;
 export const BLOCKCHAIN_BLOCKS_URL = `${BLOCKCHAIN_BASE_URL}/blocks`;
