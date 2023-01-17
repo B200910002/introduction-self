@@ -4,9 +4,6 @@ import { Table, Button } from "react-bootstrap";
 import { BlockchainContext } from "../../context/BlockchainContext";
 
 export default class PendingTransactions extends Component {
-  // constructor(props) {
-  //     super(props);
-  // }
   static contextType = BlockchainContext;
   render() {
     const { blockchain, createBlock } = this.context;

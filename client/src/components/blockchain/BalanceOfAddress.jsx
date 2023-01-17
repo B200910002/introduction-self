@@ -4,10 +4,6 @@ import { BlockchainContext } from "../../context/BlockchainContext";
 // import Transaction from "./Transactions";
 
 export default class BalanceOffAddress extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
   static contextType = BlockchainContext;
   render() {
     const { wallet } = this.context;

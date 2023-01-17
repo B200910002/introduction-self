@@ -5,13 +5,7 @@ import { Colors, Fonts } from "../../constants/styles";
 import { BlockchainContext } from "../../context/BlockchainContext";
 
 export default class Transaction extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { transactions: [], transaction: {} };
-  }
-
   static contextType = BlockchainContext;
-
   render() {
     const { selectedBlockTransactions, getBalanceOfAddress } = this.context;
 
@@ -45,7 +39,6 @@ export default class Transaction extends Component {
                     <td>
                       <Link
                         to="wallet"
-                        // style={styles.address}
                         onClick={() => {
                           getBalanceOfAddress(transaction.toAddress);
                         }}

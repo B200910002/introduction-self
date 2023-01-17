@@ -3,10 +3,6 @@ import { Colors, Fonts } from "../../constants/styles";
 import { BlockchainContext } from "../../context/BlockchainContext";
 
 export default class Blocks extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { blocks: [], block: {} };
-  }
   static contextType = BlockchainContext;
   render() {
     const { blockchain, setSelectedBlockTransactions } = this.context;
