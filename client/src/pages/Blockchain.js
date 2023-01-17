@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { Fonts } from "../constants/styles";
-import {
-  BlockchainContext,
-  BlockchainProvider,
-} from "../context/BlockchainContext";
+import { BlockchainContext, BlockchainProvider } from "../context/BlockchainContext";
 
 export default class Blockchain extends Component {
   constructor(props) {
@@ -34,15 +31,9 @@ class BlockchainChild extends Component {
         {server ? (
           <>
             <div style={Fonts.normalGrayItalic}>
-              <Link to="/blockchain" style={styles.link}>
-                blockchain
-              </Link>
-              <Link to="createTransaction" style={styles.link}>
-                create Transaction
-              </Link>
-              <Link to="pendingTransactions" style={styles.link}>
-                pending Transactions
-              </Link>
+              <Link to="/blockchain" style={styles.link}>blockchain</Link>
+              <Link to="createTransaction" style={styles.link}>create Transaction</Link>
+              <Link to="pendingTransactions" style={styles.link}>pending Transactions</Link>
             </div>
             <Outlet />
           </>
