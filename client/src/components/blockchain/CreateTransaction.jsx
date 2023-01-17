@@ -63,8 +63,8 @@ export default class CreateTransaction extends Component {
 
           <FormGroup>
             <Button
-              type="submit"
-              onClick={(event) => {
+              // type="submit"
+              onClick={() => {
                 createTransaction(this.state);
               }}
             >

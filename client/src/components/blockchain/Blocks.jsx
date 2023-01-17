@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Colors, Fonts } from "../../constants/styles";
 import { BlockchainContext } from "../../context/BlockchainContext";
 
-export default class Block extends Component {
+export default class Blocks extends Component {
   constructor(props) {
     super(props);
     this.state = { blocks: [], block: {} };

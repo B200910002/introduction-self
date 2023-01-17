@@ -7,6 +7,10 @@ import { BlockchainProvider } from "./context/BlockchainContext";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import CreateTransaction from "./components/blockchain/CreateTransaction";
+import PendingTransactions from "./components/blockchain/PendingTransactions";
+import Blocks from "./components/blockchain/Blocks";
+import Transaction from "./components/blockchain/Transactions";
 import BalanceOffAddress from "./components/blockchain/BalanceOfAddress";
 
 import Login from "./pages/Login";
@@ -14,6 +18,7 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Blockchain from "./pages/Blockchain";
 import NoPage from "./pages/NoPage";
+
 
 export default function App() {
   return (
@@ -24,15 +29,10 @@ export default function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="contact" element={<Contact />} />
-            <Route
-              path="blockchain"
-              element={
-                <BlockchainProvider>
-                  <Outlet />
-                </BlockchainProvider>
-              }
-            >
-              <Route index element={<Blockchain />} />
+            <Route path="blockchain" element={<BlockchainProvider><Blockchain /><Outlet /></BlockchainProvider>}>
+              <Route index element={<><Blocks /><Transaction /></>} />
+              <Route path="createTransaction" element={<CreateTransaction />} />
+              <Route path="pendingTransactions" element={<PendingTransactions />} />
               <Route path="wallet" element={<BalanceOffAddress />} />
             </Route>
           </Route>
@@ -45,21 +45,21 @@ export default function App() {
 
 const Layout = () => {
   const { isAuthentication } = useContext(AuthContext);
-  console.log("authentication: ",isAuthentication);
+  console.log("authentication: ", isAuthentication);
   return (
+    // <>
+    //   {isAuthentication ? (
     <>
-      {isAuthentication ? (
-        <>
-          <Header />
-          <div style={styles.container}>
-            <Outlet />
-          </div>
-          <Footer />
-        </>
-      ) : (
-        <></>
-      )}
+      <Header />
+      <div style={styles.container}>
+        <Outlet />
+      </div>
+      <Footer />
     </>
+    //   ) : (
+    //     <></>
+    //   )}
+    // </>
   );
 };
 
