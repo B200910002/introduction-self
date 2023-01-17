@@ -1,8 +1,8 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { Table } from "react-bootstrap";
 import { Colors, Fonts } from "../../constants/styles";
 import { BlockchainContext } from "../../context/BlockchainContext";
-import { Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 export default class Transaction extends Component {
   constructor(props) {
