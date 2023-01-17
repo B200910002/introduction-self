@@ -3,7 +3,12 @@ import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 
 import { Colors } from "./constants/styles";
 import { AuthProvider, AuthContext } from "./context/AuthContext";
-import { BlockchainProvider } from "./context/BlockchainContext";
+
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import Contact from "./pages/Contact";
+import Blockchain from "./pages/Blockchain";
+import NoPage from "./pages/NoPage";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -12,13 +17,6 @@ import PendingTransactions from "./components/blockchain/PendingTransactions";
 import Blocks from "./components/blockchain/Blocks";
 import Transaction from "./components/blockchain/Transactions";
 import BalanceOffAddress from "./components/blockchain/BalanceOfAddress";
-
-import Login from "./pages/Login";
-import Home from "./pages/Home";
-import Contact from "./pages/Contact";
-import Blockchain from "./pages/Blockchain";
-import NoPage from "./pages/NoPage";
-
 
 export default function App() {
   return (
@@ -29,7 +27,7 @@ export default function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="contact" element={<Contact />} />
-            <Route path="blockchain" element={<BlockchainProvider><Blockchain /><Outlet /></BlockchainProvider>}>
+            <Route path="blockchain" element={<Blockchain />}>
               <Route index element={<><Blocks /><Transaction /></>} />
               <Route path="createTransaction" element={<CreateTransaction />} />
               <Route path="pendingTransactions" element={<PendingTransactions />} />
