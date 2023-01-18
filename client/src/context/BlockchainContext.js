@@ -106,8 +106,9 @@ export class BlockchainProvider extends Component {
           amount: newTransaction.amount,
         })
         .then((response) => {
-          if (response.status === 200) alert(response.data);
-          else alert(response.data);
+          if (response.status === 200) {
+            alert(response.data);
+          } else alert(response.data);
         });
     } catch (err) {
       console.log(err.massage);
@@ -126,8 +127,7 @@ export class BlockchainProvider extends Component {
   };
 
   render() {
-    const { server, blockchain, selectedBlock, wallet } =
-      this.state;
+    const { server, blockchain, selectedBlock, wallet } = this.state;
     const { createTransaction, createBlock, getBalanceOfAddress } = this;
 
     let setSelectedBlock = (index, transactions) => {

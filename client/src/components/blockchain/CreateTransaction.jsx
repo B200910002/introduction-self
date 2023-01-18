@@ -13,7 +13,8 @@ export default class CreateTransaction extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fromAddress: "9d2ae321496d68f58ee47a046a4d17419cbe480f109cb7f6f9644412f4a5895c",
+      fromAddress:
+        "9d2ae321496d68f58ee47a046a4d17419cbe480f109cb7f6f9644412f4a5895c",
       toAddress: "",
       amount: 0,
     };
@@ -75,6 +76,8 @@ export default class CreateTransaction extends Component {
     );
   }
 }
+
+
 
 const styles = {
   container: {},
