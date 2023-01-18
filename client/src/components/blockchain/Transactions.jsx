@@ -7,12 +7,13 @@ import { BlockchainContext } from "../../context/BlockchainContext";
 export default class Transaction extends Component {
   static contextType = BlockchainContext;
   render() {
-    const { selectedBlockTransactions, getBalanceOfAddress } = this.context;
-
+    const { selectedBlock, getBalanceOfAddress } = this.context;
     return (
       <div style={styles.container}>
-        <p style={Fonts.largeGray}>Transactions</p>
-        {selectedBlockTransactions.length !== 0 ? (
+        <p style={Fonts.largeGray}>
+          Transactions inside block {selectedBlock.index}
+        </p>
+        {selectedBlock.transactions.length !== 0 ? (
           <div style={styles.table}>
             <Table className="mt-4" bordered size="sm">
               <thead style={Fonts.smallGray}>
@@ -26,12 +27,19 @@ export default class Transaction extends Component {
                 </tr>
               </thead>
               <tbody style={Fonts.smallGray}>
-                {selectedBlockTransactions.map((transaction) => (
+                {selectedBlock.transactions.map((transaction, index) => (
                   <tr key={transaction.timestamp}>
-                    <td>1</td>
+                    <td>{index + 1}</td>
                     <td>
                       {transaction.fromAddress ? (
-                        transaction.fromAddress.slice(0, 40)
+                        <Link
+                          to="wallet"
+                          onClick={() => {
+                            getBalanceOfAddress(transaction.fromAddress);
+                          }}
+                        >
+                          {transaction.fromAddress.slice(0, 40)}
+                        </Link>
                       ) : (
                         <p>System</p>
                       )}
@@ -43,7 +51,6 @@ export default class Transaction extends Component {
                           getBalanceOfAddress(transaction.toAddress);
                         }}
                       >
-                        {" "}
                         {transaction.toAddress.slice(0, 40)}
                       </Link>
                     </td>

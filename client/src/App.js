@@ -43,7 +43,7 @@ export default function App() {
 
 const Layout = () => {
   const { isAuthentication } = useContext(AuthContext);
-  console.log("authentication: ", isAuthentication);
+  // console.log("authentication: ", isAuthentication);
   return (
     // <>
     //   {isAuthentication ? (

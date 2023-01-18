@@ -15,7 +15,7 @@ export class BlockchainProvider extends Component {
     super(props);
     this.state = {
       server: false,
-      selectedBlockTransactions: [],
+      selectedBlock: { index: 0, transactions: [] },
       wallet: {},
       blockchain: {
         chain: [
@@ -126,12 +126,17 @@ export class BlockchainProvider extends Component {
   };
 
   render() {
-    const { server, blockchain, selectedBlockTransactions, wallet } =
+    const { server, blockchain, selectedBlock, wallet } =
       this.state;
     const { createTransaction, createBlock, getBalanceOfAddress } = this;
 
-    let setSelectedBlockTransactions = (selectedBlock) => {
-      this.setState({ selectedBlockTransactions: selectedBlock });
+    let setSelectedBlock = (index, transactions) => {
+      this.setState({
+        selectedBlock: {
+          index: index,
+          transactions: transactions,
+        },
+      });
     };
 
     return (
@@ -139,8 +144,8 @@ export class BlockchainProvider extends Component {
         value={{
           server,
           blockchain,
-          selectedBlockTransactions,
-          setSelectedBlockTransactions,
+          selectedBlock,
+          setSelectedBlock,
           createTransaction,
           createBlock,
           wallet,
