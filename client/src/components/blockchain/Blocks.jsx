@@ -24,7 +24,7 @@ export default class Blocks extends Component {
                 <p>timestamp: {block.timestamp}</p>
                 <button
                   onClick={() => {
-                    setSelectedBlock(index,block.transactions);
+                    setSelectedBlock(index, block.transactions);
                   }}
                 >
                   See transactions
@@ -51,5 +51,6 @@ const styles = {
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
+    borderRadius: "10px",
   },
 };
