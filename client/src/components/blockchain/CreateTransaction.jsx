@@ -61,7 +61,7 @@ export default class CreateTransaction extends Component {
             />
           </FormGroup>
 
-          <FormGroup>
+          <FormGroup style={styles.button}>
             <Button
               // type="submit"
               onClick={() => {
@@ -77,8 +77,9 @@ export default class CreateTransaction extends Component {
   }
 }
 
-
-
 const styles = {
   container: {},
+  button: {
+    marginTop: "20px",
+  },
 };

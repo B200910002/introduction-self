@@ -76,7 +76,7 @@ export default class PendingTransactions extends Component {
           </>
         ) : (
           <>
-            <p style={Fonts.smallGrayItalic}>No pending transaction.</p>
+            <p style={Fonts.smallGrayItalic}>No pending transactions.</p>
           </>
         )}
       </div>

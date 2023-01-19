@@ -41,11 +41,13 @@ export default class Blocks extends Component {
 const styles = {
   container: {},
   gridContainer: {
+    margin:"20px 0",
     display: "grid",
     gridTemplateColumns: "auto auto auto auto",
+    columnGap: "20px",
+    rowGap: "20px",
   },
   block: {
-    margin: "10px",
     padding: "10px",
     backgroundColor: Colors.containerBackColor,
     overflow: "hidden",
