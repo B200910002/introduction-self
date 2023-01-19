@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Colors, Fonts } from "../constants/styles";
 import { Images } from "../constants/assets";
 import TodoApp from "../components/Todo";
-import { Image } from "react-bootstrap";
 
 export default class Home extends Component {
   render() {
