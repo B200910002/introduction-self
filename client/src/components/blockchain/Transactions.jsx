@@ -28,7 +28,7 @@ export default class Transaction extends Component {
               </thead>
               <tbody style={Fonts.smallGray}>
                 {selectedBlock.transactions.map((transaction, index) => (
-                  <tr key={transaction.timestamp}>
+                  <tr key={index}>
                     <td>{index + 1}</td>
                     <td>
                       {transaction.fromAddress ? (

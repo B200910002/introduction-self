@@ -1,10 +1,33 @@
 import React, { Component } from "react";
 import { Colors, Fonts } from "../constants/styles";
 import { Images } from "../constants/assets";
+import { HomeContext, HomeProvider } from "../context/HomeContext";
+
 import TodoApp from "../components/Todo";
+import { Table } from "react-bootstrap";
 
 export default class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
   render() {
+    return (
+      <HomeProvider>
+        <HomeChild />
+      </HomeProvider>
+    );
+  }
+}
+
+class HomeChild extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  static contextType = HomeContext;
+  render() {
+    const { grade } = this.context;
     return (
       <div>
         <div style={styles.toDo}>
@@ -30,6 +53,37 @@ export default class Home extends Component {
             </div>
           </div>
         </div>
+        <div>
+          <p style={Fonts.largeGray}>Grades</p>
+          <Table className="mt-4" bordered size="sm">
+            <thead style={Fonts.smallGray}>
+              <tr>
+                <td>#</td>
+                <td>Lesson code</td>
+                <td>Lesson name</td>
+                <td>Credit</td>
+                <td>70</td>
+                <td>30</td>
+                <td>Total</td>
+                <td>Letter</td>
+              </tr>
+            </thead>
+            <tbody style={Fonts.smallGray}>
+              {grade.map((lesson, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{lesson.lesson_code}</td>
+                  <td>{lesson.lesson_name}</td>
+                  <td>{lesson.lesson_credit}</td>
+                  <td>{lesson.seventy_grade}</td>
+                  <td>{lesson.thirty_exam_grade}</td>
+                  <td>{lesson.total_grade}</td>
+                  <td>{lesson.letter_grade}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
       </div>
     );
   }
@@ -41,7 +95,8 @@ const styles = {
     margin: "20px 0",
     backgroundColor: Colors.containerBackColor,
     color: Colors.whiteColor,
-    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
+    boxShadow:
+      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
   timer: {
     textAlign: "right",
@@ -60,7 +115,8 @@ const styles = {
     // placeItems: "center",
     height: "300px",
     borderRadius: "10px",
-    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
+    boxShadow:
+      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   },
   img1: {
     backgroundImage: `url(${Images.dota2})`,
