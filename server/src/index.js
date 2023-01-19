@@ -8,7 +8,8 @@ const fileUpload = require("express-fileupload");
 const API = require("./constants/api/Api");
 
 //routes
-const userRoute = require("./routes/blockchainRoute");
+const blockchain = require("./routes/blockchainRoute");
+const grade = require("./routes/gradeRoute");
 
 //uses
 app.use(fileUpload());
@@ -18,7 +19,8 @@ app.use(express.json());
 app.use(cors());
 
 //use api
-app.use(API.blockchainAPI, userRoute);
+app.use(API.blockchainAPI, blockchain);
+app.use(API.gradeAPI, grade);
 
 app.listen(process.env.PORT, () => {
   console.log(process.env.LOCAL_HOST_PORT);
