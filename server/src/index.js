@@ -5,11 +5,11 @@ const cors = require("cors");
 const fileUpload = require("express-fileupload");
 
 //api
-const API = require("./constants/api/Api");
+const API = require("./constant/api/Api");
 
 //routes
-const blockchain = require("./routes/blockchainRoute");
-const grade = require("./routes/gradeRoute");
+const blockchain = require("./route/blockchainRoute");
+const grade = require("./route/gradeRoute");
 
 //uses
 app.use(fileUpload());
