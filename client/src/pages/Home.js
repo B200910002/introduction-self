@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Colors, Fonts } from "../constants/styles";
+import { Fonts } from "../constants/styles";
 import { Images } from "../constants/assets";
 import { HomeContext, HomeProvider } from "../context/HomeContext";
 
@@ -30,10 +30,10 @@ class HomeChild extends Component {
     const { grade } = this.context;
     return (
       <div>
-        <div style={styles.toDo}>
+        <section>
           <TodoApp />
-        </div>
-        <div>
+        </section>
+        <section>
           <p style={Fonts.largeGray}>Favorite games</p>
           <div style={styles.gridContainer}>
             <div style={styles.img1}>
@@ -52,8 +52,8 @@ class HomeChild extends Component {
               </div>
             </div>
           </div>
-        </div>
-        <div>
+        </section>
+        <section>
           <p style={Fonts.largeGray}>Grades</p>
           <Table className="mt-4" bordered size="sm">
             <thead style={Fonts.smallGray}>
@@ -83,21 +83,13 @@ class HomeChild extends Component {
               ))}
             </tbody>
           </Table>
-        </div>
+        </section>
       </div>
     );
   }
 }
 
 const styles = {
-  toDo: {
-    padding: "50px",
-    margin: "20px 0",
-    backgroundColor: Colors.containerBackColor,
-    color: Colors.whiteColor,
-    boxShadow:
-      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-  },
   timer: {
     textAlign: "right",
   },

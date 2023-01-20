@@ -14,5 +14,8 @@ export default class Contact extends Component {
 }
 
 const styles = {
-  container: {},
+  container: {
+    // display: "grid",
+    // placeItems: "center",
+  },
 };

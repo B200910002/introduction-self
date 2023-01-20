@@ -74,7 +74,9 @@ const styles = {
     textDecoration: "none",
   },
   timer: {
-    textAlign: "right",
+    display: "grid",
+    placeItems: "end",
+    // textAlign: "right",
     padding: "5px 0",
   },
 };

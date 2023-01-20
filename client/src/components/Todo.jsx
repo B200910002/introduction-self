@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {} from '../constants/styles'
+import { Fonts } from "../constants/styles";
 
 export default class TodoApp extends Component {
   constructor(props) {
@@ -12,10 +12,10 @@ export default class TodoApp extends Component {
   render() {
     return (
       <div>
-        <h3>TODO</h3>
+        <p style={Fonts.largeGray}>Todo</p>
         <TodoList items={this.state.items} />
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="new-todo">What needs to be done?</label>
+          <label style={Fonts.normalGray} htmlFor="new-todo">What needs to be done?</label>
           <input
             id="new-todo"
             onChange={this.handleChange}
@@ -52,7 +52,7 @@ class TodoList extends React.Component {
     return (
       <ul>
         {this.props.items.map((item) => (
-          <li key={item.id}>{item.text}</li>
+          <li style={Fonts.smallGrayItalic} key={item.id}>{item.text}</li>
         ))}
       </ul>
     );
