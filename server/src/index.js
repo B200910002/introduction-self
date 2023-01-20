@@ -3,6 +3,10 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
+const connectDB = require("./database/connection");
+
+//data base
+connectDB();
 
 //api
 const API = require("./constant/api/Api");
