@@ -5,7 +5,7 @@ const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const connectDB = require("./database/connection");
 
-//data base
+//data base connection
 connectDB();
 
 //api
