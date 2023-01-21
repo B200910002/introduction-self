@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Fonts } from "../constants/styles";
+import { Colors, Fonts } from "../constants/styles";
 import { Images } from "../constants/assets";
 import { HomeContext, HomeProvider } from "../context/HomeContext";
+import { Link } from "react-router-dom";
 
 import TodoApp from "../components/Todo";
-import { Table } from "react-bootstrap";
+import { Image, Table } from "react-bootstrap";
 
 export default class Home extends Component {
   constructor(props) {
@@ -27,11 +28,41 @@ class HomeChild extends Component {
   }
   static contextType = HomeContext;
   render() {
-    const { grade } = this.context;
+    const { grade, books } = this.context;
     return (
       <div>
         <section>
           <TodoApp />
+        </section>
+        <section>
+          <p style={Fonts.largeGray}>Books</p>
+          <div style={styles.bookGrid}>
+            {books.map((book, index) => (
+              <Link key={index} to="details">
+                <div style={styles.bookContainer}>
+                  <div
+                    style={{
+                      display: "grid",
+                      placeItems: "center",
+                      width: "100%",
+                    }}
+                  >
+                    <Image
+                      src={book.picture.pictures[0]}
+                      style={{ width: "200px", height: "300px" }}
+                    />
+                  </div>
+                  <p style={Fonts.normalGrayBold}>{book.title}</p>
+                  <p style={Fonts.smallGray}>
+                    {book.author.firstName + " " + book.author.lastName}
+                  </p>
+                  <p style={Fonts.smallGray}>
+                    {new Date(book.date).toUTCString().substring(5, 16)}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </section>
         <section>
           <p style={Fonts.largeGray}>Favorite games</p>
@@ -127,5 +158,20 @@ const styles = {
     backgroundSize: "cover",
     backgroundPosition: "center",
     borderRadius: "10px",
+  },
+  bookGrid: {
+    margin: "20px 0",
+    display: "grid",
+    gap: "20px",
+    gridTemplateColumns: "auto auto auto ",
+  },
+  bookContainer: {
+    display: "grid",
+    placeItems: "start",
+    boxShadow:
+      "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    backgroundColor: Colors.containerBackColor,
+    borderRadius: "10px",
+    padding: "10px",
   },
 };

@@ -10,3 +10,5 @@ export const BLOCKCHAIN_CREATE_TRANSACTION_URL = `${BLOCKCHAIN_BASE_URL}/create/
 export const BLOCKCHAIN_CREATE_BLOCK_URL = `${BLOCKCHAIN_BASE_URL}/create/block`;
 
 export const GRADE_URL = `${BASE_URL}/grade/`;
+
+export const BOOKS_URL = `${BASE_URL}/bookStore/`;

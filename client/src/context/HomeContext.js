@@ -1,13 +1,13 @@
 import React, { Component, createContext } from "react";
 import axios from "axios";
-import { GRADE_URL } from "../constants/config";
+import { GRADE_URL, BOOKS_URL } from "../constants/config";
 
 export const HomeContext = createContext({});
 
 export class HomeProvider extends Component {
   constructor(props) {
     super(props);
-    this.state = { grade: [] };
+    this.state = { grade: [], books: [] };
   }
   componentDidMount = () => {
     this.refreshData();
@@ -17,14 +17,17 @@ export class HomeProvider extends Component {
       await axios.get(GRADE_URL).then((response) => {
         this.setState({ grade: response.data });
       });
+      await axios.get(BOOKS_URL).then((response) => {
+        this.setState({ books: response.data });
+      });
     } catch (err) {
       console.log(err.message);
     }
   };
   render() {
-    const { grade } = this.state;
+    const { grade, books } = this.state;
     return (
-      <HomeContext.Provider value={{grade}}>
+      <HomeContext.Provider value={{ grade, books }}>
         {this.props.children}
       </HomeContext.Provider>
     );
