@@ -1,49 +1,63 @@
 const mongoose = require("mongoose");
 
+const genreSchema = new mongoose.Schema({
+  genre: String,
+  description: String,
+});
+
 const authorSchema = new mongoose.Schema({
-  firstName: String,
-  lastName: String,
-  birthDate: Date,
-});
-
-const addressSchema = new mongoose.Schema({
-  country: String,
-  state: String,
-  city: String,
-  description: String,
-});
-
-const studioSchema = new mongoose.Schema({
-  studioName: String,
-  description: String,
-  address: addressSchema,
-});
-
-const pictureSchema = new mongoose.Schema({
-  pictures: [String],
-});
-
-const bookSchema = new mongoose.Schema({
-  title: String,
-  date: Date,
-  page: Number,
-  sibn: Number,
-  description: String,
-  author: authorSchema,
-  studio: studioSchema,
-  picture: pictureSchema,
-});
-
-const markBookSchema = new mongoose.Schema({
-  date: Date,
-  page: Number,
-  book: bookSchema,
-  customer: {
-    name: String,
-    gmail: String,
+  authorName: String,
+  picture: [String],
+  bio: String,
+  born: {
+    date: Date,
+    description: String,
   },
-  state: String,
+  died: {
+    date: Date,
+    description: String,
+  },
+  genre: [Object],
 });
 
-module.exports.Book = mongoose.model("Book", bookSchema);
-module.exports.MarkBook = mongoose.model("MarkBook", markBookSchema);
+const publisherSchema = new mongoose.Schema({
+  publisherName: String,
+  description: String,
+});
+
+const languageSchema = new mongoose.Schema({
+  language: String,
+  description: String,
+});
+
+const editionBookSchema = new mongoose.Schema({
+  title: String,
+  isbn: Number,
+  picture: String,
+  description: String,
+  pages: Number,
+  date: Date,
+  originBook: Object,
+  editionAuthor: Object,
+  publisher: Object,
+  language: Object,
+});
+
+const originBookSchema = new mongoose.Schema({
+  originTitle: String,
+  originAuthor: Object,
+  genres: [Object],
+  awards: [String],
+  setting: String,
+  characters: [Object],
+  bookEditions: [Object],
+  ratings: [],
+  reviews: [],
+});
+
+module.exports.Genre = mongoose.model("Genre", genreSchema);
+module.exports.Author = mongoose.model("Author", authorSchema);
+module.exports.Publisher = mongoose.model("Publisher", publisherSchema);
+module.exports.Language = mongoose.model("Language", languageSchema);
+module.exports.EditionBook = mongoose.model("EditionBook", editionBookSchema);
+module.exports.OriginBook = mongoose.model("OriginBook", originBookSchema);
