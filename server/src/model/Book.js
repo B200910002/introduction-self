@@ -51,8 +51,8 @@ const originBookSchema = new mongoose.Schema({
   setting: String,
   characters: [Object],
   bookEditions: [Object],
-  ratings: [],
-  reviews: [],
+  ratings: [Object],
+  reviews: [Object],
 });
 
 module.exports.Genre = mongoose.model("Genre", genreSchema);

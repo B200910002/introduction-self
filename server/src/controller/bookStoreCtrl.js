@@ -7,20 +7,91 @@ const {
   Genre,
 } = require("../model/Book");
 
-exports.getAllBooks = async (req, res, next) => {
+exports.getAllLanguages = async (req, res, next) => {
   try {
+    const langs = await Language.find();
+    res.status(200).json(langs);
+  } catch (e) {
+    res.status(201).json(e.message);
+  }
+};
+
+exports.getAllAuthors = async (req, res, next) => {
+  try {
+    const author = await Author.find();
+    res.status(200).json(author);
+  } catch (e) {
+    res.status(201).json(e.message);
+  }
+};
+
+exports.getAllGenres = async (req, res, next) => {
+  try {
+    const genre = await Genre.find();
+    res.status(200).json(genre);
+  } catch (e) {
+    res.status(201).json(e.message);
+  }
+};
+
+exports.getAllPublishers = async (req, res, next) => {
+  try {
+    const pub = await Publisher.find();
+    res.status(200).json(pub);
+  } catch (e) {
+    res.status(201).json(e.message);
+  }
+};
+
+exports.getAllOriginBooks = async (req, res, next) => {
+  try {
+    const originBook = await OriginBook.find();
+    res.status(200).json(originBook);
+  } catch (e) {
+    res.status(201).json(e.message);
+  }
+};
+
+exports.getAllEditionBooks = async (req, res, next) => {
+  try {
+    const result = [];
     const books = await EditionBook.find();
     for (let book of books) {
-      const author = await Author.findById(book.author);
-      const publisher = await Publisher.findById(book.publisher);
+      const oBook = await OriginBook.findById(book.originBook);
+      const oAuthor = await Author.findById(oBook.originAuthor);
       const language = await Language.findById(book.language);
-      book.author = author;
-      book.publisher = publisher;
+      book.originBook = oBook;
       book.language = language;
+      result.push({
+        _id: book._id,
+        title: book.title,
+        author: oAuthor.authorName,
+        language: book.language.language,
+        picture: book.picture,
+        __v: book.__v,
+      });
     }
-    res.status(200).json(books);
+    res.status(200).json(result);
   } catch (e) {
     // next(err);
+    res.status(201).json(e.message);
+  }
+};
+
+exports.getByIdEditionBook = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const editionBook = await EditionBook.findById(id);
+    const originBook = await OriginBook.findById(editionBook.originBook);
+    const editionAuthor = await Author.findById(editionBook.editionAuthor);
+    const publisher = await Publisher.findById(editionBook.publisher);
+    const language = await Language.findById(editionBook.language);
+    editionBook.originBook = originBook;
+    editionBook.editionAuthor = editionAuthor;
+    editionBook.publisher = publisher;
+    editionBook.language = language;
+    res.status(200).json(editionBook);
+  } catch (e) {
     res.status(201).json(e.message);
   }
 };
@@ -141,3 +212,21 @@ exports.createEditionBook = async (req, res, next) => {
   }
 };
 
+exports.deleteByIdEditionBook = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await EditionBook.findByIdAndDelete(id).then((data) => {
+      if (!data) {
+        res
+          .status(404)
+          .json({ message: `Cannot Delete with id ${id}. Maybe id is wrong` });
+      } else {
+        res.json({
+          message: "User was deleted successfully!",
+        });
+      }
+    });
+  } catch (e) {
+    res.status(201).json(e.message);
+  }
+};
