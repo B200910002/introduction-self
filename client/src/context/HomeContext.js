@@ -1,6 +1,6 @@
 import React, { Component, createContext } from "react";
 import axios from "axios";
-import { GRADE_URL, BOOKS_URL } from "../constants/config";
+import { GRADE_URL, BOOKSTORE_BOOKS_URL } from "../constants/config";
 
 export const HomeContext = createContext({});
 
@@ -17,7 +17,7 @@ export class HomeProvider extends Component {
       await axios.get(GRADE_URL).then((response) => {
         this.setState({ grade: response.data });
       });
-      await axios.get(BOOKS_URL).then((response) => {
+      await axios.get(BOOKSTORE_BOOKS_URL).then((response) => {
         this.setState({ books: response.data });
       });
     } catch (err) {

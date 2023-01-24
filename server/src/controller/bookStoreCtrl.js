@@ -66,6 +66,7 @@ exports.getAllEditionBooks = async (req, res, next) => {
         _id: book._id,
         title: book.title,
         author: oAuthor.authorName,
+        date: book.date,
         language: book.language.language,
         picture: book.picture,
         __v: book.__v,

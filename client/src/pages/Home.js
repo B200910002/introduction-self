@@ -38,29 +38,41 @@ class HomeChild extends Component {
           <p style={Fonts.largeGray}>Books</p>
           <div style={styles.bookGrid}>
             {books.map((book, index) => (
-              <Link key={index} to="details">
-                <div style={styles.bookContainer}>
-                  <div
-                    style={{
-                      display: "grid",
-                      placeItems: "center",
-                      width: "100%",
-                    }}
-                  >
-                    <Image
-                      src={book.picture.pictures[0]}
-                      style={{ width: "200px", height: "300px" }}
-                    />
-                  </div>
-                  <p style={Fonts.normalGrayBold}>{book.title}</p>
-                  <p style={Fonts.smallGray}>
-                    {book.author.firstName + " " + book.author.lastName}
-                  </p>
-                  <p style={Fonts.smallGray}>
-                    {new Date(book.date).toUTCString().substring(5, 16)}
-                  </p>
+              <div style={styles.bookContainer} key={index}>
+                <div
+                  style={{
+                    display: "grid",
+                    placeItems: "center",
+                    width: "100%",
+                  }}
+                >
+                  <Image
+                    src={book.picture}
+                    style={{ width: "150px", height: "220px" }}
+                  />
                 </div>
-              </Link>
+                <Link to="details" style={Fonts.normalGrayBold}>
+                  {book.title}
+                </Link>
+                <div style={Fonts.smallGray}>
+                  <div>
+                    Author:{" "}
+                    <Link to="sda" style={Fonts.smallGrayBold}>
+                      {book.author}
+                    </Link>
+                  </div>
+                  <div>
+                    Date:{" "}
+                    <Link style={Fonts.smallGrayBold}>
+                      {new Date(book.date).toUTCString().substring(5, 16)}
+                    </Link>
+                  </div>
+                  <div>
+                    Language:{" "}
+                    <Link style={Fonts.smallGrayBold}>{book.language}</Link>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </section>
@@ -163,7 +175,7 @@ const styles = {
     margin: "20px 0",
     display: "grid",
     gap: "20px",
-    gridTemplateColumns: "auto auto auto ",
+    gridTemplateColumns: "auto auto auto auto",
   },
   bookContainer: {
     display: "grid",
