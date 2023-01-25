@@ -93,8 +93,10 @@ exports.getByIdEditionBook = async (req, res, next) => {
     const editionBook = await EditionBook.findById(id);
     const originBook = await OriginBook.findById(editionBook.originBook);
     const editionAuthor = await Author.findById(editionBook.editionAuthor);
+    const originAuthor = await Author.findById(originBook.originAuthor);
     const publisher = await Publisher.findById(editionBook.publisher);
     const language = await Language.findById(editionBook.language);
+    originBook.originAuthor = originAuthor;
     editionBook.originBook = originBook;
     editionBook.editionAuthor = editionAuthor;
     editionBook.publisher = publisher;
@@ -219,7 +221,7 @@ exports.createEditionBook = async (req, res, next) => {
       pages: pages,
       date: date,
       originBook: bo._id,
-      editionAuthor: auth._id,
+      editionAuthor: auth ? auth._id : null,
       publisher: pub._id,
       language: lan._id,
     });
