@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Blockchain from "./pages/Blockchain";
+import Bookstore from "./pages/Bookstore";
 import NoPage from "./pages/NoPage";
 
 import Header from "./components/Header";
@@ -17,6 +18,8 @@ import PendingTransactions from "./components/blockchain/PendingTransactions";
 import Blocks from "./components/blockchain/Blocks";
 import Transaction from "./components/blockchain/Transactions";
 import BalanceOffAddress from "./components/blockchain/BalanceOfAddress";
+import BookDetails from "./components/bookstore/BookDetails";
+import ViewAuthor from "./components/bookstore/ViewAuthor";
 
 export default function App() {
   return (
@@ -32,6 +35,11 @@ export default function App() {
               <Route path="createTransaction" element={<CreateTransaction />} />
               <Route path="pendingTransactions" element={<PendingTransactions />} />
               <Route path="wallet" element={<BalanceOffAddress />} />
+            </Route>
+            <Route path="bookstore" element={<Bookstore />}>
+              <Route index element={<></>}/>
+              <Route path="author" element={<ViewAuthor />}/>
+              <Route path="bookDetail" element={<BookDetails />}/>
             </Route>
           </Route>
           <Route path="*" element={<NoPage />} />

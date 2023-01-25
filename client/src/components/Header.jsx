@@ -33,6 +33,11 @@ export default class Header extends Component {
               <p style={Fonts.smallGray}>Blockchain</p>
             </Link>
           </li>
+          <li style={styles.li}>
+            <Link style={styles.a} to="/bookstore">
+              <p style={Fonts.smallGray}>Book store</p>
+            </Link>
+          </li>
           <div style={styles.timer}>
             <Timer />
           </div>

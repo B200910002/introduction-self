@@ -379,3 +379,20 @@ exports.deleteByIdEditionBook = async (req, res, next) => {
     res.status(201).json(e.message);
   }
 };
+
+exports.uploadPic = (req, res) => {
+  let sampleFile;
+  let uploadPath;
+
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).send("No files were upload.");
+  }
+
+  sampleFile = req.files.photo;
+  uploadPath = process.cwd() + "/public/img/" + sampleFile.name;
+
+  sampleFile.mv(uploadPath, function (err) {
+    if (err) return res.status(500).send(err);
+    res.send(process.env.LOCAL_HOST_PORT + "public/img/" + sampleFile.name);
+  });
+};

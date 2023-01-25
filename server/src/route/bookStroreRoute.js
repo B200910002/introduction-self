@@ -27,6 +27,8 @@ router.post("/import-genres", bookStoreCtrl.importGenres);
 router.post("/import-origin-books", bookStoreCtrl.importOriginBooks);
 router.post("/import-edition-books", bookStoreCtrl.importEditionBooks);
 
+router.post("/upload-picture", bookStoreCtrl.uploadPic);
+
 //put
 
 //delete
