@@ -18,8 +18,16 @@ exports.getAllLanguages = async (req, res, next) => {
 
 exports.getAllAuthors = async (req, res, next) => {
   try {
-    const author = await Author.find();
-    res.status(200).json(author);
+    const authors = await Author.find();
+    for (let author of authors) {
+      const genres = [];
+      for (let genre of author.genres) {
+        const g = await Genre.findById(genre);
+        genres.push(g.genre);
+      }
+      author.genres = genres;
+    }
+    res.status(200).json(authors);
   } catch (e) {
     res.status(201).json(e.message);
   }
@@ -112,14 +120,22 @@ exports.createGenre = async (req, res, next) => {
 
 exports.createAuthor = async (req, res, next) => {
   try {
-    const { authorName, picture, bio, born, died, genre } = req.body;
+    const { authorName, picture, bio, born, died, genres } = req.body;
+    const gs = [];
+    for (let genre of genres) {
+      await Genre.findById(genre)
+        .then((data) => {
+          gs.push(data._id);
+        })
+        .catch(() => {});
+    }
     const newAuthor = await Author.create({
       authorName: authorName,
       picture: picture,
       bio: bio,
       born: born,
       died: died,
-      genre: genre,
+      genres: gs,
     });
     res.status(200).json(newAuthor);
   } catch (e) {
@@ -140,7 +156,7 @@ exports.createPublisher = async (req, res, next) => {
   }
 };
 
-exports.creataeLanguage = async (req, res, next) => {
+exports.createLanguage = async (req, res, next) => {
   try {
     const { language, description } = req.body;
     const newLanguage = await Language.create({
@@ -208,6 +224,136 @@ exports.createEditionBook = async (req, res, next) => {
       language: lan._id,
     });
     res.status(200).json(newBookEdition);
+  } catch (e) {
+    res.status(201).json(e.message);
+  }
+};
+
+exports.importGenres = async (req, res, next) => {
+  try {
+    const { genres } = req.body;
+    for (let genre of genres) {
+      await Genre.create({
+        genre: genre.genre,
+        description: genre.description,
+      });
+    }
+    res.status(200).json("import a " + genres.length + " genres!");
+  } catch (e) {
+    res.status(201).json(e.message);
+  }
+};
+
+exports.importAuthors = async (req, res, next) => {
+  try {
+    const { authors } = req.body;
+    if (authors) {
+      for (let author of authors) {
+        const gs = [];
+        for (let genre of author.genres) {
+          await Genre.findById(genre)
+            .then((data) => {
+              gs.push(data._id);
+            })
+            .catch(() => {});
+        }
+        await Author.create({
+          authorName: author.authorName,
+          picture: author.picture,
+          bio: author.bio,
+          born: author.born,
+          died: author.died,
+          genres: gs,
+        });
+      }
+    }
+    res.status(200).json("import a " + authors.length + " authors!");
+  } catch (e) {
+    res.status(201).json(e.message);
+  }
+};
+
+exports.importPublishers = async (req, res, next) => {
+  try {
+    const { publishers } = req.body;
+    for (let pub of publishers) {
+      await Publisher.create({
+        publisherName: pub.publisherName,
+        description: pub.description,
+      });
+    }
+    res.status(200).json("import a " + publishers.length + " publishers!");
+  } catch (e) {
+    res.status(201).json(e.message);
+  }
+};
+
+exports.importLanguages = async (req, res, next) => {
+  try {
+    const { languages } = req.body;
+    for (let lan of languages) {
+      await Language.create({
+        language: lan.language,
+        description: lan.description,
+      });
+    }
+    res.status(200).json("import a " + languages.length + " languages!");
+  } catch (e) {
+    res.status(201).json(e.message);
+  }
+};
+
+exports.importOriginBooks = async (req, res, next) => {
+  try {
+    const { originBooks } = req.body;
+    for (let originBook of originBooks) {
+      const auth = await Author.findById(originBook.originAuthor);
+      const gens = [];
+      for (let genre of originBook.genres) {
+        await Genre.findById(genre)
+          .then((data) => {
+            gens.push(data._id);
+          })
+          .catch(() => {});
+      }
+      await OriginBook.create({
+        originTitle: originBook.originTitle,
+        originAuthor: auth._id,
+        genres: gens,
+        awards: originBook.awards,
+        setting: originBook.setting,
+        characters: originBook.characters,
+      });
+    }
+    res.status(200).json("import a " + originBooks.length + " origin books!");
+  } catch (e) {
+    res.status(201).json(e.message);
+  }
+};
+
+exports.importEditionBooks = async (req, res, next) => {
+  try {
+    const { editionBooks } = req.body;
+    for (let editionBook of editionBooks) {
+      const bo = await OriginBook.findById(editionBook.originBook);
+      const auth = await Author.findById(editionBook.editionAuthor);
+      const pub = await Publisher.findById(editionBook.publisher);
+      const lan = await Language.findById(editionBook.language);
+
+      await EditionBook.create({
+        title: editionBook.title,
+        isbn: editionBook.isbn,
+        picture: editionBook.picture,
+        description: editionBook.description,
+        pages: editionBook.pages,
+        date: editionBook.date,
+        originBook: bo._id,
+        editionAuthor: auth._id,
+        publisher: pub._id,
+        language: lan._id,
+      });
+    }
+    res.status(200).json("import a " + editionBooks.length + " edition books!");
   } catch (e) {
     res.status(201).json(e.message);
   }

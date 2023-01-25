@@ -14,11 +14,18 @@ router.get("/edition-books/:id", bookStoreCtrl.getByIdEditionBook);
 //post
 router.post("/");
 router.post("/create-author", bookStoreCtrl.createAuthor);
-router.post("/create-language", bookStoreCtrl.creataeLanguage);
+router.post("/create-language", bookStoreCtrl.createLanguage);
 router.post("/create-publisher", bookStoreCtrl.createPublisher);
 router.post("/create-genre", bookStoreCtrl.createGenre);
 router.post("/create-origin-book", bookStoreCtrl.createOriginBook);
 router.post("/create-edition-book", bookStoreCtrl.createEditionBook);
+
+router.post("/import-authors", bookStoreCtrl.importAuthors);
+router.post("/import-languages", bookStoreCtrl.importLanguages);
+router.post("/import-publishers", bookStoreCtrl.importPublishers);
+router.post("/import-genres", bookStoreCtrl.importGenres);
+router.post("/import-origin-books", bookStoreCtrl.importOriginBooks);
+router.post("/import-edition-books", bookStoreCtrl.importEditionBooks);
 
 //put
 

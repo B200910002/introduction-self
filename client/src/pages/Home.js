@@ -57,7 +57,7 @@ class HomeChild extends Component {
                 <div style={Fonts.smallGray}>
                   <div>
                     Author:{" "}
-                    <Link to="sda" style={Fonts.smallGrayBold}>
+                    <Link to="author" style={Fonts.smallGrayBold}>
                       {book.author}
                     </Link>
                   </div>

@@ -17,7 +17,7 @@ const authorSchema = new mongoose.Schema({
     date: Date,
     description: String,
   },
-  genre: [Object],
+  genres: [Object],
 });
 
 const publisherSchema = new mongoose.Schema({
