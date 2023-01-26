@@ -39,14 +39,19 @@ export class BookstoreChild extends Component {
               <Link to="author" style={styles.link}>
                 Author
               </Link>
-              <Link to="book" style={styles.link}>
-                Book
+              <Link to="originBook" style={styles.link}>
+                Origin Book
+              </Link>
+              <Link to="editionBook" style={styles.link}>
+                Edition Book
               </Link>
             </div>
             <Outlet />
           </>
         ) : (
-          <></>
+          <>
+            <p style={Fonts.normalGray}>server has turn off!</p>
+          </>
         )}
       </>
     );

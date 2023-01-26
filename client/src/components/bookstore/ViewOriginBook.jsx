@@ -19,7 +19,7 @@ export default class ViewOrgingBook extends Component {
       <>
         <p style={Fonts.largeGray}>Origin Books</p>
         <Button onClick={() => this.setState({ addModalShow: true })}>
-          Add Book
+          Add Origin Book
         </Button>
         <AddOriginBook show={this.state.addModalShow} onHide={addModalClose} />
         <EditOriginBook
@@ -65,7 +65,7 @@ export default class ViewOrgingBook extends Component {
                   {
                     <ul>
                       {book.awards.map((award, index) => (
-                        <li key={index}>{award}</li>
+                        <li key={index}>{String(award).substring(0, 12)}. . .</li>
                       ))}
                     </ul>
                   }

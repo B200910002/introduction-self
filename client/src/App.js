@@ -20,6 +20,7 @@ import Transaction from "./components/blockchain/Transactions";
 import BalanceOffAddress from "./components/blockchain/BalanceOfAddress";
 import ViewAuthor from "./components/bookstore/ViewAuthor";
 import ViewOriginBook from "./components/bookstore/ViewOriginBook";
+import ViewEditionBook from "./components/bookstore/ViewEditionBook";
 
 export default function App() {
   return (
@@ -39,7 +40,8 @@ export default function App() {
             <Route path="bookstore" element={<Bookstore />}>
               <Route index element={<></>} />
               <Route path="author" element={<ViewAuthor />} />
-              <Route path="book" element={<ViewOriginBook />} />
+              <Route path="originBook" element={<ViewOriginBook />} />
+              <Route path="editionBook" element={<ViewEditionBook />} />
             </Route>
           </Route>
           <Route path="*" element={<NoPage />} />

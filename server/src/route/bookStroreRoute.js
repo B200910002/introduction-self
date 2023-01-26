@@ -9,7 +9,9 @@ router.get("/publisher", bookStoreCtrl.getAllPublishers);
 router.get("/genres", bookStoreCtrl.getAllGenres);
 router.get("/origin-books", bookStoreCtrl.getAllOriginBooks);
 router.get("/edition-books", bookStoreCtrl.getAllEditionBooks);
+router.get("/books", bookStoreCtrl.getAllBooks);
 router.get("/edition-books/:id", bookStoreCtrl.getByIdEditionBook);
+
 
 //post
 router.post("/");

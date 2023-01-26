@@ -53,14 +53,52 @@ exports.getAllPublishers = async (req, res, next) => {
 
 exports.getAllOriginBooks = async (req, res, next) => {
   try {
-    const originBook = await OriginBook.find();
-    res.status(200).json(originBook);
+    const originBooks = await OriginBook.find();
+    for (let originBook of originBooks) {
+      const author = await Author.findById(originBook.originAuthor);
+      const gs = [];
+      for (let genre of originBook.genres) {
+        const g = await Genre.findById(genre);
+        gs.push(g.genre);
+      }
+      const ags = [];
+      for (let genre of author.genres) {
+        const g = await Genre.findById(genre);
+        ags.push(g.genre);
+      }
+      author.genres = ags;
+      originBook.originAuthor = author.authorName;
+      originBook.genres = gs;
+    }
+    res.status(200).json(originBooks);
   } catch (e) {
     res.status(201).json(e.message);
   }
 };
 
 exports.getAllEditionBooks = async (req, res, next) => {
+  try {
+    const editionBooks = await EditionBook.find();
+    for (let editionBook of editionBooks) {
+      const originBook = await OriginBook.findById(editionBook.originBook);
+      const editionAuthor = await Author.findById(editionBook.editionAuthor);
+      const publisher = await Publisher.findById(editionBook.publisher);
+      const language = await Language.findById(editionBook.language);
+      editionBook.originBook = originBook.originTitle;
+      editionBook.editionAuthor = editionAuthor
+        ? editionAuthor.authorName
+        : null;
+      editionBook.publisher = publisher.publisherName;
+      editionBook.language = language.language;
+    }
+    res.status(200).json(editionBooks);
+  } catch (e) {
+    // next(err);
+    res.status(201).json(e.message);
+  }
+};
+
+exports.getAllBooks = async (req, res, next) => {
   try {
     const result = [];
     const books = await EditionBook.find();

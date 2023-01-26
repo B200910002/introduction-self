@@ -30,8 +30,7 @@ export class BookstoreProvider extends Component {
   getAllEditionBooks = async () => {
     try {
       await axios.get(BOOKSTORE_URL + "/edition-books").then((response) => {
-        this.setState({ originBooks: response.data });
-        console.log(response.data)
+        this.setState({ editionBooks: response.data });
       });
     } catch (e) {
       console.log(e.message);
