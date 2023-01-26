@@ -11,6 +11,7 @@ export class BookstoreProvider extends Component {
   }
 
   componentDidMount = () => {
+    this.getAllEditionBooks();
     this.getAllOriginBooks();
     this.getAllAuthors();
     this.getAllGenres();
@@ -20,10 +21,20 @@ export class BookstoreProvider extends Component {
     try {
       await axios.get(BOOKSTORE_URL + "/origin-books").then((response) => {
         this.setState({ originBooks: response.data });
-        console.log(response.data);
       });
     } catch (e) {
-      alert(e.message);
+      console.log(e.message);
+    }
+  };
+
+  getAllEditionBooks = async () => {
+    try {
+      await axios.get(BOOKSTORE_URL + "/edition-books").then((response) => {
+        this.setState({ originBooks: response.data });
+        console.log(response.data)
+      });
+    } catch (e) {
+      console.log(e.message);
     }
   };
 
@@ -33,7 +44,7 @@ export class BookstoreProvider extends Component {
         this.setState({ authors: response.data });
       });
     } catch (e) {
-      alert(e.message);
+      console.log(e.message);
     }
   };
 
@@ -53,7 +64,7 @@ export class BookstoreProvider extends Component {
           // console.log(author);
         });
     } catch (e) {
-      alert(e.message);
+      console.log(e.message);
     }
   };
 
@@ -63,7 +74,7 @@ export class BookstoreProvider extends Component {
         this.setState({ genres: response.data });
       });
     } catch (e) {
-      alert(e.message);
+      console.log(e.message);
     }
   };
 

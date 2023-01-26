@@ -12,7 +12,7 @@ export default class ViewOrgingBook extends Component {
   }
   static contextType = BookstoreContext;
   render() {
-    const { originBooks, editionBooks } = this.context;
+    const { originBooks } = this.context;
     let addModalClose = () => this.setState({ addModalShow: false });
     let editModalClose = () => this.setState({ editModalShow: false });
     return (
