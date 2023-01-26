@@ -7,7 +7,7 @@ export default class AddAuthor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      authorName: "",
       bio: "",
       birthDate: "",
       birthPlace: "",
@@ -19,7 +19,7 @@ export default class AddAuthor extends Component {
   }
   static contextType = BookstoreContext;
   render() {
-    const { genres, file, uploadPicture, createAuthor } = this.context;
+    const { genres, uploadPicture, createAuthor } = this.context;
     return (
       <Modal
         {...this.props}
@@ -44,7 +44,7 @@ export default class AddAuthor extends Component {
                   required
                   placeholder="Author name"
                   onChange={(event) =>
-                    this.setState({ name: event.target.value })
+                    this.setState({ authorName: event.target.value })
                   }
                 />
               </Form.Group>
@@ -123,16 +123,17 @@ export default class AddAuthor extends Component {
             </Col>
             <Col sm={6}>
               <Form.Group controlId="picture">
-                <Image width={540} src={file} />
+                <Image width={540} src={this.state.picture[0]} />
                 <br />
                 <Form.Control
                   type="file"
                   name="picture"
                   required
                   placeholder="picture"
-                  onChange={(event) => {
-                    uploadPicture(event);
-                    this.setState({ picture: file });
+                  onChange={async (event) => {
+                    let pic = await uploadPicture(event);
+                    console.log(pic);
+                    this.setState({ picture: [pic] });
                   }}
                 />
               </Form.Group>

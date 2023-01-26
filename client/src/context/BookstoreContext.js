@@ -7,12 +7,24 @@ export const BookstoreContext = createContext({});
 export class BookstoreProvider extends Component {
   constructor(props) {
     super(props);
-    this.state = { authors: [], genres: [], file: "" };
+    this.state = { originBooks: [], editionBooks: [], authors: [], genres: [] };
   }
 
   componentDidMount = () => {
+    this.getAllOriginBooks();
     this.getAllAuthors();
     this.getAllGenres();
+  };
+
+  getAllOriginBooks = async () => {
+    try {
+      await axios.get(BOOKSTORE_URL + "/origin-books").then((response) => {
+        this.setState({ originBooks: response.data });
+        console.log(response.data);
+      });
+    } catch (e) {
+      alert(e.message);
+    }
   };
 
   getAllAuthors = () => {
@@ -37,8 +49,8 @@ export class BookstoreProvider extends Component {
           genres: author.genres,
         })
         .then((response) => {
-          // alert(response.data._id);
-          console.log(response.data);
+          alert(response.data._id);
+          // console.log(author);
         });
     } catch (e) {
       alert(e.message);
@@ -55,25 +67,33 @@ export class BookstoreProvider extends Component {
     }
   };
 
-  uploadPicture = (event) => {
+  uploadPicture = async (event) => {
     const photo = event.target.files[0];
     this.photofilename = photo.name;
     var formPhoto = new FormData();
     formPhoto.append("photo", photo);
-
-    axios
+    let result = "";
+    await axios
       .post(BOOKSTORE_URL + "/upload-picture", formPhoto)
       .then((response) => {
-        this.setState({ file: response.data });
+        result = response.data;
       });
+    return result;
   };
 
   render() {
-    const { authors, genres, file } = this.state;
+    const { originBooks, editionBooks, authors, genres } = this.state;
     const { uploadPicture, createAuthor } = this;
     return (
       <BookstoreContext.Provider
-        value={{ authors, genres, file, uploadPicture, createAuthor }}
+        value={{
+          originBooks,
+          editionBooks,
+          authors,
+          genres,
+          uploadPicture,
+          createAuthor,
+        }}
       >
         {this.props.children}
       </BookstoreContext.Provider>
