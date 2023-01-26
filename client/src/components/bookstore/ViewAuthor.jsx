@@ -39,7 +39,7 @@ export default class ViewAuthor extends Component {
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{author.authorName}</td>
-                <td>{String(author.bio).substring(0,50)}...</td>
+                <td>{author.bio ? (author.bio).substring(0,50)+" . . ." : ""}</td>
                 <td>{author.born ? new Date(author.born.date).toString().substring(4,16)+" "+author.born.description : null}</td>
                 <td>{author.died ? new Date(author.died.date).toString().substring(4,16)+" "+author.died.description: null}</td>
                 <td><ul>{author.genres.map((genre, index) => (<li key={index}>{genre}</li>))}</ul></td>

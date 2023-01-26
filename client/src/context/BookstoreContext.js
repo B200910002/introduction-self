@@ -37,9 +37,9 @@ export class BookstoreProvider extends Component {
     }
   };
 
-  getAllAuthors = () => {
+  getAllAuthors = async () => {
     try {
-      axios.get(BOOKSTORE_URL + "/authors").then((response) => {
+      await axios.get(BOOKSTORE_URL + "/authors").then((response) => {
         this.setState({ authors: response.data });
       });
     } catch (e) {
@@ -47,9 +47,9 @@ export class BookstoreProvider extends Component {
     }
   };
 
-  createAuthor = (author) => {
+  createAuthor = async (author) => {
     try {
-      axios
+      await axios
         .post(BOOKSTORE_URL + "/create-author", {
           authorName: author.authorName,
           picture: author.picture,
@@ -60,16 +60,15 @@ export class BookstoreProvider extends Component {
         })
         .then((response) => {
           alert(response.data._id);
-          // console.log(author);
         });
     } catch (e) {
       console.log(e.message);
     }
   };
 
-  getAllGenres = () => {
+  getAllGenres = async () => {
     try {
-      axios.get(BOOKSTORE_URL + "/genres").then((response) => {
+      await axios.get(BOOKSTORE_URL + "/genres").then((response) => {
         this.setState({ genres: response.data });
       });
     } catch (e) {
