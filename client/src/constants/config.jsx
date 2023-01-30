@@ -13,4 +13,6 @@ export const GRADE_URL = `${BASE_URL}/grade/`;
 
 export const BOOKSTORE_URL = `${BASE_URL}/bookStore/`;
 export const BOOKSTORE_BOOKS_URL = `${BOOKSTORE_URL}/books`;
+export const BOOKSTORE_CREATE_ORIGIN_BOOK = `${BOOKSTORE_URL}/create-origin-book`
+export const BOOKSTORE_CREATE_EDITION_BOOK = `${BOOKSTORE_URL}/create-edition-book`
 

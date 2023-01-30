@@ -5,7 +5,7 @@ const bookStoreCtrl = require("../controller/bookStoreCtrl");
 //get
 router.get("/authors", bookStoreCtrl.getAllAuthors);
 router.get("/languages", bookStoreCtrl.getAllLanguages);
-router.get("/publisher", bookStoreCtrl.getAllPublishers);
+router.get("/publishers", bookStoreCtrl.getAllPublishers);
 router.get("/genres", bookStoreCtrl.getAllGenres);
 router.get("/origin-books", bookStoreCtrl.getAllOriginBooks);
 router.get("/edition-books", bookStoreCtrl.getAllEditionBooks);

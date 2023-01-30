@@ -132,7 +132,6 @@ export default class AddAuthor extends Component {
                   placeholder="picture"
                   onChange={async (event) => {
                     let pic = await uploadPicture(event);
-                    console.log(pic);
                     this.setState({ picture: [pic] });
                   }}
                 />

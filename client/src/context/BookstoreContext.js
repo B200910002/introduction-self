@@ -1,13 +1,24 @@
 import React, { Component, createContext } from "react";
 import axios from "axios";
-import { BOOKSTORE_URL } from "../constants/config";
+import {
+  BOOKSTORE_URL,
+  BOOKSTORE_CREATE_ORIGIN_BOOK,
+  BOOKSTORE_CREATE_EDITION_BOOK,
+} from "../constants/config";
 
 export const BookstoreContext = createContext({});
 
 export class BookstoreProvider extends Component {
   constructor(props) {
     super(props);
-    this.state = { originBooks: [], editionBooks: [], authors: [], genres: [] };
+    this.state = {
+      originBooks: [],
+      editionBooks: [],
+      authors: [],
+      genres: [],
+      languages: [],
+      publishers: [],
+    };
   }
 
   componentDidMount = () => {
@@ -15,6 +26,8 @@ export class BookstoreProvider extends Component {
     this.getAllOriginBooks();
     this.getAllAuthors();
     this.getAllGenres();
+    this.getAllLanguages();
+    this.getAllPublishers();
   };
 
   getAllOriginBooks = async () => {
@@ -66,10 +79,71 @@ export class BookstoreProvider extends Component {
     }
   };
 
+  createOriginBook = async (originBook) => {
+    try {
+      await axios
+        .post(BOOKSTORE_CREATE_ORIGIN_BOOK, {
+          originTitle: originBook.title,
+          originAuthor: originBook.author,
+          genres: originBook.genres,
+          characters: originBook.characters,
+          awards: originBook.awards,
+        })
+        .then((response) => {
+          alert(response.data._id);
+        });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  createEditionBook = async (editionBook) => {
+    try {
+      await axios
+        .post(BOOKSTORE_CREATE_EDITION_BOOK, {
+          title: editionBook.title,
+          isbn: editionBook.isbn,
+          picture: editionBook.picture,
+          description: editionBook.description,
+          pages: editionBook.pages,
+          date: editionBook.date,
+          originBook: editionBook.originBook,
+          editionAuthor: editionBook.translator,
+          publisher: editionBook.publisher,
+          language: editionBook.language,
+        })
+        .then((response) => {
+          alert(response.data._id);
+        });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
   getAllGenres = async () => {
     try {
       await axios.get(BOOKSTORE_URL + "/genres").then((response) => {
         this.setState({ genres: response.data });
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  getAllLanguages = async () => {
+    try {
+      await axios.get(BOOKSTORE_URL + "/languages").then((response) => {
+        this.setState({ languages: response.data });
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  getAllPublishers = async () => {
+    try {
+      await axios.get(BOOKSTORE_URL + "/publishers").then((response) => {
+        this.setState({ publishers: response.data });
       });
     } catch (e) {
       console.log(e.message);
@@ -91,8 +165,16 @@ export class BookstoreProvider extends Component {
   };
 
   render() {
-    const { originBooks, editionBooks, authors, genres } = this.state;
-    const { uploadPicture, createAuthor } = this;
+    const {
+      originBooks,
+      editionBooks,
+      authors,
+      genres,
+      languages,
+      publishers,
+    } = this.state;
+    const { uploadPicture, createAuthor, createOriginBook, createEditionBook } =
+      this;
     return (
       <BookstoreContext.Provider
         value={{
@@ -100,8 +182,12 @@ export class BookstoreProvider extends Component {
           editionBooks,
           authors,
           genres,
+          languages,
+          publishers,
           uploadPicture,
           createAuthor,
+          createOriginBook,
+          createEditionBook,
         }}
       >
         {this.props.children}
