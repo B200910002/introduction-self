@@ -12,23 +12,21 @@ export default class Blockchain extends Component {
   render() {
     return (
       <BlockchainProvider>
-        <BlockchainChild />
+        <BlockchainConsumer />
       </BlockchainProvider>
     );
   }
 }
 
-class BlockchainChild extends Component {
+class BlockchainConsumer extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-  static contextType = BlockchainContext;
   render() {
-    const { server } = this.context;
     return (
-      <>
-        {server ? (
+      <BlockchainContext.Consumer>
+        {(context) => context.server ? (
           <>
             <div style={Fonts.normalGrayItalic}>
               <Link to="/blockchain" style={styles.link}>blockchain</Link>
@@ -42,7 +40,7 @@ class BlockchainChild extends Component {
             <p style={Fonts.normalGray}>Block chain server has turn off!</p>
           </>
         )}
-      </>
+      </BlockchainContext.Consumer>
     );
   }
 }

@@ -8,7 +8,7 @@ import EditAuthor from "./EditAuthor";
 export default class ViewAuthor extends Component {
   constructor(props) {
     super(props);
-    this.state = { author: {}, addModalShow: false, editModalShow:false };
+    this.state = { author: {}, addModalShow: false, editModalShow: false };
   }
   static contextType = BookstoreContext;
   render() {
@@ -18,9 +18,15 @@ export default class ViewAuthor extends Component {
     return (
       <>
         <p style={Fonts.largeGray}>Authors</p>
-        <Button onClick={() => this.setState({addModalShow: true})}>Add Author</Button>
-        <AddAuthor show={this.state.addModalShow} onHide={addModalClose}/>
-        <EditAuthor show={this.state.editModalShow} onHide={editModalClose} author={this.state.author}/>
+        <Button onClick={() => this.setState({ addModalShow: true })}>
+          Add Author
+        </Button>
+        <AddAuthor show={this.state.addModalShow} onHide={addModalClose} />
+        <EditAuthor
+          show={this.state.editModalShow}
+          onHide={editModalClose}
+          author={this.state.author}
+        />
         <Table className="mt-4" bordered size="sm">
           <thead style={Fonts.smallGray}>
             <tr>
@@ -39,15 +45,50 @@ export default class ViewAuthor extends Component {
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{author.authorName}</td>
-                <td>{author.bio ? (author.bio).substring(0,50)+" . . ." : ""}</td>
-                <td>{author.born ? new Date(author.born.date).toString().substring(4,16)+" "+author.born.description : null}</td>
-                <td>{author.died ? new Date(author.died.date).toString().substring(4,16)+" "+author.died.description: null}</td>
-                <td><ul>{author.genres.map((genre, index) => (<li key={index}>{genre}</li>))}</ul></td>
-                <td><ul>{author.picture.map((pic, index) => (<li key={index}>{pic}</li>))}</ul></td>
                 <td>
-                    <Button onClick={() => this.setState({editModalShow: true, author: author})}><i className="bi bi-pencil-square"></i></Button>
-                    <Button className="mr-2" variant="danger"><i className="bi bi-trash-fill"></i></Button></td>
-                </tr>
+                  {author.bio ? author.bio.substring(0, 50) + " . . ." : ""}
+                </td>
+                <td>
+                  {author.born
+                    ? new Date(author.born.date).toString().substring(4, 16) +
+                      " " +
+                      author.born.description
+                    : null}
+                </td>
+                <td>
+                  {author.died
+                    ? new Date(author.died.date).toString().substring(4, 16) +
+                      " " +
+                      author.died.description
+                    : null}
+                </td>
+                <td>
+                  <ul>
+                    {author.genres.map((genre, index) => (
+                      <li key={index}>{genre}</li>
+                    ))}
+                  </ul>
+                </td>
+                <td>
+                  <ul>
+                    {author.picture.map((pic, index) => (
+                      <li key={index}>{pic}</li>
+                    ))}
+                  </ul>
+                </td>
+                <td>
+                  <Button
+                    onClick={() =>
+                      this.setState({ editModalShow: true, author: author })
+                    }
+                  >
+                    <i className="bi bi-pencil-square"></i>
+                  </Button>
+                  <Button className="mr-2" variant="danger">
+                    <i className="bi bi-trash-fill"></i>
+                  </Button>
+                </td>
+              </tr>
             ))}
           </tbody>
         </Table>

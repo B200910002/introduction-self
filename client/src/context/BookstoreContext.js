@@ -67,8 +67,8 @@ export class BookstoreProvider extends Component {
           authorName: author.authorName,
           picture: author.picture,
           bio: author.bio,
-          born: { date: author.birthDate, description: author.birthPlace },
-          died: { date: author.diedDate, description: author.diedPlace },
+          born: author.birthDate ? { date: author.birthDate, description: author.birthPlace } : null,
+          died: author.diedDate ? { date: author.diedDate, description: author.diedPlace } : null,
           genres: author.genres,
         })
         .then((response) => {

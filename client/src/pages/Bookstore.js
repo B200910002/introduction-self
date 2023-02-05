@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { Fonts } from "../constants/styles";
-import {
-  BookstoreContext,
-  BookstoreProvider,
-} from "../context/BookstoreContext";
+import { BookstoreContext, BookstoreProvider } from "../context/BookstoreContext";
 
 export default class Bookstore extends Component {
   constructor(props) {
@@ -14,23 +11,21 @@ export default class Bookstore extends Component {
   render() {
     return (
       <BookstoreProvider>
-        <BookstoreChild />
+        <BookstoreConsumer />
       </BookstoreProvider>
     );
   }
 }
 
-export class BookstoreChild extends Component {
+class BookstoreConsumer extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-  static contextType = BookstoreContext;
   render() {
-    const { authors } = this.context;
     return (
-      <>
-        {authors.length !== 0 ? (
+      <BookstoreContext.Consumer>
+        {(context) => context.authors.length !== 0 ?(
           <>
             <div style={Fonts.normalGrayItalic}>
               <Link to="" style={styles.link}>
@@ -53,7 +48,7 @@ export class BookstoreChild extends Component {
             <p style={Fonts.normalGray}>server has turn off!</p>
           </>
         )}
-      </>
+      </BookstoreContext.Consumer>
     );
   }
 }
