@@ -1,7 +1,7 @@
 export const BASE_URL = `http://localhost:9000/api/v1`;
 
-export const LOGIN_URL = `htpp://localhost:8080/login`;
-export const LOGOUT_URL = `htpp://localhost:8080/logout`;
+export const LOGIN_URL = `http://localhost:9000/api/v1/user/login`;
+export const REGISTER_URL = `http://localhost:9000/api/v1/user/register`;
 
 export const BLOCKCHAIN_BASE_URL = `${BASE_URL}/blockchain`;
 export const BLOCKCHAIN_BLOCKS_URL = `${BLOCKCHAIN_BASE_URL}/blocks`;
@@ -11,7 +11,7 @@ export const BLOCKCHAIN_CREATE_BLOCK_URL = `${BLOCKCHAIN_BASE_URL}/create/block`
 
 export const GRADE_URL = `${BASE_URL}/grade/`;
 
-export const BOOKSTORE_URL = `${BASE_URL}/bookStore/`;
+export const BOOKSTORE_URL = `${BASE_URL}/book/`;
 export const BOOKSTORE_BOOKS_URL = `${BOOKSTORE_URL}/books`;
 export const BOOKSTORE_CREATE_ORIGIN_BOOK = `${BOOKSTORE_URL}/create-origin-book`
 export const BOOKSTORE_CREATE_EDITION_BOOK = `${BOOKSTORE_URL}/create-edition-book`

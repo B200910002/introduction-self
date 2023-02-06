@@ -14,7 +14,8 @@ const API = require("./constant/api/Api");
 //routes
 const blockchain = require("./route/blockchainRoute");
 const grade = require("./route/gradeRoute");
-const bookStore = require("./route/bookRoute");
+const book = require("./route/bookRoute");
+const user = require("./route/userRoute");
 
 //uses
 app.use(fileUpload());
@@ -26,7 +27,8 @@ app.use(cors());
 //use api
 app.use(API.blockchainAPI, blockchain);
 app.use(API.gradeAPI, grade);
-app.use(API.bookStoreAPI, bookStore);
+app.use(API.bookAPI, book);
+app.use(API.userApi, user);
 
 app.listen(process.env.PORT, () => {
   console.log(process.env.LOCAL_HOST_PORT);

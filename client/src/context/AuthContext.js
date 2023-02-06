@@ -1,86 +1,75 @@
 import React, { Component, createContext } from "react";
 import axios from "axios";
-import { LOGIN_URL, LOGOUT_URL } from "../constants/config";
+import { LOGIN_URL, REGISTER_URL } from "../constants/config";
 
 export const AuthContext = createContext({});
 
 export class AuthProvider extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      username: "",
-      password: "",
-      isAuthentication: false,
-    };
+    this.state = { email: "", password: "" };
   }
 
-  setUsername = (username) => {
-    this.setState({ username: username });
+  setEmail = (username) => {
+    this.setState({ email: username });
   };
 
   setPassword = (password) => {
     this.setState({ password: password });
   };
 
-  login = () => {
+  login = async () => {
     try {
-      axios
-        .post(LOGIN_URL, {
-          username: this.state.username,
-          password: this.state.password,
-        })
-        .then((response) => {
-          if (response.status === 200) {
-            this.setState({ isAuthentication: response.data });
-            alert("log in...");
-          } else {
-            alert("username or password is not valid!");
-          }
-        });
+      const response = await axios.post(LOGIN_URL, {
+        email: this.state.email,
+        password: this.state.password,
+      });
+
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+        alert("Login successfully");
+        this.setState({ isAuthentication: true });
+        window.location.href = "/";
+      } else {
+        alert("Please check your email and password");
+      }
     } catch (err) {
       console.log(err.message);
     }
     this.setState({ isAuthentication: true });
   };
 
-  logout = () => {
+  register = async () => {
     try {
-      axios.post(LOGOUT_URL).then((response) => {
-        if (response.status === 200) {
-          this.setState({ isAuthentication: false });
-          alert("log out!...");
-        }
-      });
-    } catch (err) {
-      console.log(err.message);
+      await axios
+        .post(REGISTER_URL, {
+          email: this.state.email,
+          password: this.state.password,
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            console.log(response.data);
+          } else {
+            alert("email or password is not valid!");
+          }
+        });
+    } catch (e) {
+      alert(e.message);
     }
   };
 
-  tick() {
-    this.setState((state) => ({
-      timer: state.timer + 1,
-    }));
-  }
-
-  componentDidMount() {
-    this.interval = setInterval(() => this.tick(), 1000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
   render() {
-    const { isAuthentication } = this.state;
-    const { setUsername, setPassword, login, logout } = this;
+    const { email, password } = this.state;
+    const { setEmail, setPassword, login, register } = this;
     return (
       <AuthContext.Provider
         value={{
-          setUsername,
+          email,
+          password,
+          setEmail,
           setPassword,
           login,
-          logout,
-          isAuthentication,
+          register,
         }}
       >
         {this.props.children}

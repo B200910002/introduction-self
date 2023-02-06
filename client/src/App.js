@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 
 import { Colors } from "./constants/styles";
-import { AuthProvider, AuthContext } from "./context/AuthContext";
+import { AuthProvider } from "./context/AuthContext";
 
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Blockchain from "./pages/Blockchain";
@@ -27,14 +28,17 @@ export default function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />}></Route>
+          <Route path="/auth">
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </Route>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="contact" element={<Contact />} />
             <Route path="blockchain" element={<Blockchain />}>
-              <Route index element={<><Blocks /><Transaction /></>} />
+              <Route index element={<><Blocks /><Transaction /></>}/>
               <Route path="createTransaction" element={<CreateTransaction />} />
-              <Route path="pendingTransactions" element={<PendingTransactions />} />
+              <Route path="pendingTransactions" element={<PendingTransactions />}/>
               <Route path="wallet" element={<BalanceOffAddress />} />
             </Route>
             <Route path="bookstore" element={<Bookstore />}>
@@ -52,22 +56,21 @@ export default function App() {
 }
 
 const Layout = () => {
-  const { isAuthentication } = useContext(AuthContext);
-  // console.log("authentication: ", isAuthentication);
+  const isAuth = localStorage.getItem("token");
   return (
-    // <>
-    //   {isAuthentication ? (
     <>
-      <Header />
-      <div style={styles.container}>
-        <Outlet />
-      </div>
-      <Footer />
+      {isAuth ? (
+        <>
+          <Header />
+          <div style={styles.container}>
+            <Outlet />
+          </div>
+          <Footer />
+        </>
+      ) : (
+        (window.location.href = "/auth/login")
+      )}
     </>
-    //   ) : (
-    //     <></>
-    //   )}
-    // </>
   );
 };
 
