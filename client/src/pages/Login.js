@@ -14,38 +14,35 @@ export default class Login extends Component {
     return (
       <>
         {!localStorage.getItem("token") ? (
-          <div className="caixa__login">
-            <h2>Login</h2>
-            <form>
-              <div className="caixa__login-input">
-                <input
-                  type="text"
-                  required
-                  onChange={(event) => {
-                    setEmail(event.target.value);
-                  }}
-                />
-                <label>Email</label>
-              </div>
-              <div className="caixa__login-input">
-                <input
-                  type="password"
-                  required
-                  onChange={(event) => {
-                    setPassword(event.target.value);
-                  }}
-                />
-                <label>Password</label>
-              </div>
-              <Link onClick={() => login()}>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                login
-              </Link>
-            </form>
-          </div>
+          <form>
+            <div className="caixa__login-input">
+              <input
+                type="text"
+                required
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
+              />
+              <label>Email</label>
+            </div>
+            <div className="caixa__login-input">
+              <input
+                type="password"
+                required
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+              />
+              <label>Password</label>
+            </div>
+            <Link className="a" onClick={() => login()}>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              login
+            </Link>
+          </form>
         ) : (
           <>{(window.location.href = "/")}</>
         )}

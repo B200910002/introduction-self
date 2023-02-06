@@ -14,8 +14,6 @@ export default class Register extends Component {
     return (
       <>
         {!localStorage.getItem("token") ? (
-          <div className="caixa__login">
-            <h2>Register</h2>
             <form>
               <div className="caixa__login-input">
                 <input
@@ -47,16 +45,14 @@ export default class Register extends Component {
                 />
                 <label>Repeat-password</label>
               </div>
-              {/* <Link onClick={() => reigster()}>
+              <Link className="a" onClick={() => register()}>
                 <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
                 register
-              </Link> */}
-              <button onClick={() => register()}>register</button>
+              </Link>
             </form>
-          </div>
         ) : (
           <>{(window.location.href = "/")}</>
         )}

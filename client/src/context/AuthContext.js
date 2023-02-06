@@ -35,8 +35,17 @@ export class AuthProvider extends Component {
       }
     } catch (err) {
       console.log(err.message);
+      alert(err.message);
     }
-    this.setState({ isAuthentication: true });
+  };
+
+  logout = async () => {
+    localStorage.removeItem("token");
+    window.location.href = "/auth/login";
+    try {
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   register = async () => {
@@ -60,7 +69,7 @@ export class AuthProvider extends Component {
 
   render() {
     const { email, password } = this.state;
-    const { setEmail, setPassword, login, register } = this;
+    const { setEmail, setPassword, login, logout, register } = this;
     return (
       <AuthContext.Provider
         value={{
@@ -69,6 +78,7 @@ export class AuthProvider extends Component {
           setEmail,
           setPassword,
           login,
+          logout,
           register,
         }}
       >

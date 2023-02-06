@@ -4,12 +4,15 @@ import { Link } from "react-router-dom";
 import { Colors, Fonts } from "../constants/styles";
 import { Images } from "../constants/assets";
 import Timer from "./Timer";
+import { AuthContext } from "../context/AuthContext";
 
 export default class Header extends Component {
   // constructor(props) {
   //   super(props);
   // }
+  static contextType = AuthContext;
   render() {
+    const { logout } = this.context;
     return (
       <>
         <div style={styles.gridContainer}>
@@ -40,6 +43,7 @@ export default class Header extends Component {
           </li>
           <div style={styles.timer}>
             <Timer />
+            <Link onClick={() => logout()}>logout</Link>
           </div>
         </ul>
       </>
@@ -80,8 +84,8 @@ const styles = {
   },
   timer: {
     display: "grid",
+    gridTemplateColumns: "auto 55px",
     placeItems: "end",
-    // textAlign: "right",
     padding: "5px 0",
   },
 };

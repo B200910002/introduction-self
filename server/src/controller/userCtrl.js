@@ -19,7 +19,8 @@ exports.login = async (req, res, next) => {
     const user = await User.findOne({ email: email });
 
     if (!user) {
-      return { status: "error", error: "Invlid login" };
+      // return { status: "error", error: "Invlid login" };
+      return res.send("Invalid email!")
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -35,8 +36,6 @@ exports.login = async (req, res, next) => {
     } else {
       return res.status(401).json({ status: "error", token: false });
     }
-
-    res.status(200).json(response);
   } catch (e) {
     res.status(401).json(e.message);
   }
