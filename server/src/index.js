@@ -14,7 +14,7 @@ const API = require("./constant/api/Api");
 //routes
 const blockchain = require("./route/blockchainRoute");
 const grade = require("./route/gradeRoute");
-const bookStore = require("./route/bookStroreRoute");
+const bookStore = require("./route/bookRoute");
 
 //uses
 app.use(fileUpload());

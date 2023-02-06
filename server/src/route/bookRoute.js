@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const bookStoreCtrl = require("../controller/bookStoreCtrl");
+const bookStoreCtrl = require("../controller/bookCtrl");
 
 //get
 router.get("/authors", bookStoreCtrl.getAllAuthors);
