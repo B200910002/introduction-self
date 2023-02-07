@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 
 import { Colors } from "./constants/styles";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider, AuthContext } from "./context/AuthContext";
 
 import Auth from './pages/Auth'
 import Login from "./pages/Login";
@@ -57,10 +57,10 @@ export default function App() {
 }
 
 const Layout = () => {
-  const isAuth = localStorage.getItem("token");
+  const {user} = useContext(AuthContext)
   return (
     <>
-      {isAuth ? (
+      {user ? (
         <>
           <Header />
           <div style={styles.container}>
@@ -68,9 +68,8 @@ const Layout = () => {
           </div>
           <Footer />
         </>
-      ) : (
-        (window.location.href = "/auth/login")
-      )}
+      ) : <>{window.location.href = "/auth/login"}</>
+      }
     </>
   );
 };

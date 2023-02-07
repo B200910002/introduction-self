@@ -12,7 +12,7 @@ export default class Header extends Component {
   // }
   static contextType = AuthContext;
   render() {
-    const { logout } = this.context;
+    const { logout, user } = this.context;
     return (
       <>
         <div style={styles.gridContainer}>
@@ -43,6 +43,7 @@ export default class Header extends Component {
           </li>
           <div style={styles.timer}>
             <Timer />
+            <p style={Fonts.smallGrayBold}>{user.email}</p>
             <Link onClick={() => logout()}>logout</Link>
           </div>
         </ul>
@@ -84,7 +85,7 @@ const styles = {
   },
   timer: {
     display: "grid",
-    gridTemplateColumns: "auto 55px",
+    gridTemplateColumns: "auto auto 55px",
     placeItems: "end",
     padding: "5px 0",
   },

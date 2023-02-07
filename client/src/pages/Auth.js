@@ -1,4 +1,3 @@
-import "./Login.css";
 import React, { Component } from "react";
 import { Link, Outlet } from "react-router-dom";
 
@@ -6,7 +5,7 @@ export default class Auth extends Component {
   render() {
     return (
       <>
-        {!localStorage.getItem("token") ? (
+        {!localStorage.getItem("user") ? (
           <div className="caixa__login">
             <h2>
               <Link to="login">Login</Link>

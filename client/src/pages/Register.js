@@ -1,58 +1,61 @@
-import "./Login.css";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 export default class Register extends Component {
-  //   constructor(props) {
-  //     super(props);
-  //     this.state = { username: "", password: "" };
-  //   }
+  constructor(props) {
+    super(props);
+    this.state = { email: "", password: "", repeatPassword: "" };
+  }
   static contextType = AuthContext;
   render() {
-    const { setEmail, setPassword, register } = this.context;
+    const { register } = this.context;
+    const { email, password, repeatPassword } = this.state;
     return (
       <>
         {!localStorage.getItem("token") ? (
-            <form>
-              <div className="caixa__login-input">
-                <input
-                  type="text"
-                  required
-                  onChange={(event) => {
-                    setEmail(event.target.value);
-                  }}
-                />
-                <label>Email</label>
-              </div>
-              <div className="caixa__login-input">
-                <input
-                  type="password"
-                  required
-                  onChange={(event) => {
-                    setPassword(event.target.value);
-                  }}
-                />
-                <label>Password</label>
-              </div>
-              <div className="caixa__login-input">
-                <input
-                  type="password"
-                  required
-                //   onChange={(event) => {
-                //     setPassword(event.target.value);
-                //   }}
-                />
-                <label>Repeat-password</label>
-              </div>
-              <Link className="a" onClick={() => register()}>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                register
-              </Link>
-            </form>
+          <form>
+            <div className="caixa__login-input">
+              <input
+                type="text"
+                required
+                onChange={(event) => {
+                  this.setState({ email: event.target.value });
+                }}
+              />
+              <label>Email</label>
+            </div>
+            <div className="caixa__login-input">
+              <input
+                type="password"
+                required
+                onChange={(event) => {
+                  this.setState({ password: event.target.value });
+                }}
+              />
+              <label>Password</label>
+            </div>
+            <div className="caixa__login-input">
+              <input
+                type="password"
+                required
+                onChange={(event) => {
+                  this.setState({ repeatPassword: event.target.value });
+                }}
+              />
+              <label>Repeat-password</label>
+            </div>
+            <Link
+              className="a"
+              onClick={() => register(email, password, repeatPassword)}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              register
+            </Link>
+          </form>
         ) : (
           <>{(window.location.href = "/")}</>
         )}

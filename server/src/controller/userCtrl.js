@@ -20,19 +20,16 @@ exports.login = async (req, res, next) => {
 
     if (!user) {
       // return { status: "error", error: "Invlid login" };
-      return res.send("Invalid email!")
+      return res.send("Invalid email!");
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (isPasswordValid) {
-      const token = jwt.sign(
-        {
-          email: user.email,
-        },
-        "secret123"
-      );
-      return res.status(200).json({ status: "ok", token: token });
+      const token = jwt.sign({ email: user.email }, "secret123", {
+        expiresIn: "1d",
+      });
+      return res.status(200).json({ email: email, token: token });
     } else {
       return res.status(401).json({ status: "error", token: false });
     }

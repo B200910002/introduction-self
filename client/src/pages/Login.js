@@ -1,16 +1,16 @@
-import "./Login.css";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 export default class Login extends Component {
-  //   constructor(props) {
-  //     super(props);
-  //     this.state = { username: "", password: "" };
-  //   }
+  constructor(props) {
+    super(props);
+    this.state = { email: "", password: "" };
+  }
   static contextType = AuthContext;
   render() {
-    const { setEmail, setPassword, login } = this.context;
+    const { login } = this.context;
+    const { email, password } = this.state;
     return (
       <>
         {!localStorage.getItem("token") ? (
@@ -20,7 +20,7 @@ export default class Login extends Component {
                 type="text"
                 required
                 onChange={(event) => {
-                  setEmail(event.target.value);
+                  this.setState({ email: event.target.value });
                 }}
               />
               <label>Email</label>
@@ -30,12 +30,12 @@ export default class Login extends Component {
                 type="password"
                 required
                 onChange={(event) => {
-                  setPassword(event.target.value);
+                  this.setState({ password: event.target.value });
                 }}
               />
               <label>Password</label>
             </div>
-            <Link className="a" onClick={() => login()}>
+            <Link className="a" onClick={() => login(email, password)}>
               <span></span>
               <span></span>
               <span></span>

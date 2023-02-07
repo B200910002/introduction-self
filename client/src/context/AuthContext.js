@@ -7,26 +7,23 @@ export const AuthContext = createContext({});
 export class AuthProvider extends Component {
   constructor(props) {
     super(props);
-    this.state = { email: "", password: "" };
+    this.state = { user: {} };
   }
 
-  setEmail = (username) => {
-    this.setState({ email: username });
+  componentDidMount = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    this.setState({ user: user });
   };
 
-  setPassword = (password) => {
-    this.setState({ password: password });
-  };
-
-  login = async () => {
+  login = async (email, password) => {
     try {
       const response = await axios.post(LOGIN_URL, {
-        email: this.state.email,
-        password: this.state.password,
+        email: email,
+        password: password,
       });
 
       if (response.data.token) {
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data));
         alert("Login successfully");
         this.setState({ isAuthentication: true });
         window.location.href = "/";
@@ -40,7 +37,7 @@ export class AuthProvider extends Component {
   };
 
   logout = async () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     window.location.href = "/auth/login";
     try {
     } catch (e) {
@@ -48,12 +45,12 @@ export class AuthProvider extends Component {
     }
   };
 
-  register = async () => {
+  register = async (email, password, repeatPassword) => {
     try {
       await axios
         .post(REGISTER_URL, {
-          email: this.state.email,
-          password: this.state.password,
+          email: email,
+          password: password,
         })
         .then((response) => {
           if (response.status === 200) {
@@ -68,20 +65,10 @@ export class AuthProvider extends Component {
   };
 
   render() {
-    const { email, password } = this.state;
-    const { setEmail, setPassword, login, logout, register } = this;
+    const { user } = this.state;
+    const { login, logout, register } = this;
     return (
-      <AuthContext.Provider
-        value={{
-          email,
-          password,
-          setEmail,
-          setPassword,
-          login,
-          logout,
-          register,
-        }}
-      >
+      <AuthContext.Provider value={{ user, login, logout, register }}>
         {this.props.children}
       </AuthContext.Provider>
     );
