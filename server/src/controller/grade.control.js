@@ -1,4 +1,4 @@
-const { Grade } = require("../model/Grade");
+const { Grade } = require("../model/Grade.model");
 
 exports.getAll = async (req, res, next) => {
   try {

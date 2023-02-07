@@ -12,10 +12,10 @@ connectDB();
 const API = require("./constant/api/Api");
 
 //routes
-const blockchainRoute = require("./route/blockchainRoute");
-const gradeRoute = require("./route/gradeRoute");
-const bookRoute = require("./route/bookRoute");
-const userRoute = require("./route/userRoute");
+const blockchainRoute = require("./route/blockchain.router");
+const gradeRoute = require("./route/grade.router");
+const bookRoute = require("./route/book.router");
+const userRoute = require("./route/user.router");
 
 //uses
 app.use(fileUpload());

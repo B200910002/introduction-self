@@ -1,4 +1,4 @@
-const { Block, Transaction, BlockChain } = require("../model/Blockchain");
+const { Block, Transaction, BlockChain } = require("../model/Blockchain.model");
 const EC = require("elliptic").ec;
 const ec = new EC("secp256k1");
 let coin = new BlockChain();

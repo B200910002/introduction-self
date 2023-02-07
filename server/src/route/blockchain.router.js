@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const blockchainCtrl = require("../controller/blockchainCtrl");
+const blockchainCtrl = require("../controller/blockchain.control");
 
 //get
 router.get("/", blockchainCtrl.initialize);

@@ -5,14 +5,14 @@ const {
   Publisher,
   Author,
   Genre,
-} = require("../model/Book");
+} = require("../model/Book.model");
 
 exports.getAllLanguages = async (req, res, next) => {
   try {
     const langs = await Language.find();
     res.status(200).json(langs);
   } catch (e) {
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
   }
 };
 
@@ -29,7 +29,17 @@ exports.getAllAuthors = async (req, res, next) => {
     }
     res.status(200).json(authors);
   } catch (e) {
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
+  }
+};
+
+exports.getByIdAuthor = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const author = await Author.findById(id);
+    // if(!)
+  } catch (e) {
+    res.status(400).json(e.message);
   }
 };
 
@@ -38,7 +48,7 @@ exports.getAllGenres = async (req, res, next) => {
     const genre = await Genre.find();
     res.status(200).json(genre);
   } catch (e) {
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
   }
 };
 
@@ -47,7 +57,7 @@ exports.getAllPublishers = async (req, res, next) => {
     const pub = await Publisher.find();
     res.status(200).json(pub);
   } catch (e) {
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
   }
 };
 
@@ -72,7 +82,7 @@ exports.getAllOriginBooks = async (req, res, next) => {
     }
     res.status(200).json(originBooks);
   } catch (e) {
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
   }
 };
 
@@ -94,7 +104,7 @@ exports.getAllEditionBooks = async (req, res, next) => {
     res.status(200).json(editionBooks);
   } catch (e) {
     // next(err);
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
   }
 };
 
@@ -121,11 +131,11 @@ exports.getAllBooks = async (req, res, next) => {
     res.status(200).json(result);
   } catch (e) {
     // next(err);
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
   }
 };
 
-exports.getByIdEditionBook = async (req, res, next) => {
+exports.findByIdEditionBook = async (req, res, next) => {
   try {
     const { id } = req.params;
     const editionBook = await EditionBook.findById(id);
@@ -141,7 +151,7 @@ exports.getByIdEditionBook = async (req, res, next) => {
     editionBook.language = language;
     res.status(200).json(editionBook);
   } catch (e) {
-    res.status(201).json(e.message);
+    res.status(400).json({ error: e.message });
   }
 };
 
@@ -152,9 +162,9 @@ exports.createGenre = async (req, res, next) => {
       genre: genre,
       description: description,
     });
-    res.status(200).json(newGenre);
+    res.status(201).json(newGenre);
   } catch (e) {
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
   }
 };
 
@@ -177,9 +187,9 @@ exports.createAuthor = async (req, res, next) => {
       died: died,
       genres: gs,
     });
-    res.status(200).json(newAuthor);
+    res.status(201).json(newAuthor);
   } catch (e) {
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
   }
 };
 
@@ -190,9 +200,9 @@ exports.createPublisher = async (req, res, next) => {
       publisherName: publisherName,
       description: description,
     });
-    res.status(200).json(newPublisher);
+    res.status(201).json(newPublisher);
   } catch (e) {
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
   }
 };
 
@@ -203,9 +213,9 @@ exports.createLanguage = async (req, res, next) => {
       language: language,
       description: description,
     });
-    res.status(200).json(newLanguage);
+    res.status(201).json(newLanguage);
   } catch (e) {
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
   }
 };
 
@@ -227,9 +237,9 @@ exports.createOriginBook = async (req, res, next) => {
       setting: setting,
       characters: characters,
     });
-    res.status(200).json(newB);
+    res.status(201).json(newB);
   } catch (e) {
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
   }
 };
 
@@ -263,9 +273,9 @@ exports.createEditionBook = async (req, res, next) => {
       publisher: pub._id,
       language: lan._id,
     });
-    res.status(200).json(newBookEdition);
+    res.status(201).json(newBookEdition);
   } catch (e) {
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
   }
 };
 
@@ -278,9 +288,9 @@ exports.importGenres = async (req, res, next) => {
         description: genre.description,
       });
     }
-    res.status(200).json("import a " + genres.length + " genres!");
+    res.status(201).json("import a " + genres.length + " genres!");
   } catch (e) {
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
   }
 };
 
@@ -307,9 +317,9 @@ exports.importAuthors = async (req, res, next) => {
         });
       }
     }
-    res.status(200).json("import a " + authors.length + " authors!");
+    res.status(201).json("import a " + authors.length + " authors!");
   } catch (e) {
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
   }
 };
 
@@ -322,9 +332,9 @@ exports.importPublishers = async (req, res, next) => {
         description: pub.description,
       });
     }
-    res.status(200).json("import a " + publishers.length + " publishers!");
+    res.status(201).json("import a " + publishers.length + " publishers!");
   } catch (e) {
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
   }
 };
 
@@ -337,9 +347,9 @@ exports.importLanguages = async (req, res, next) => {
         description: lan.description,
       });
     }
-    res.status(200).json("import a " + languages.length + " languages!");
+    res.status(201).json("import a " + languages.length + " languages!");
   } catch (e) {
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
   }
 };
 
@@ -365,9 +375,9 @@ exports.importOriginBooks = async (req, res, next) => {
         characters: originBook.characters,
       });
     }
-    res.status(200).json("import a " + originBooks.length + " origin books!");
+    res.status(201).json("import a " + originBooks.length + " origin books!");
   } catch (e) {
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
   }
 };
 
@@ -393,9 +403,9 @@ exports.importEditionBooks = async (req, res, next) => {
         language: lan._id,
       });
     }
-    res.status(200).json("import a " + editionBooks.length + " edition books!");
+    res.status(201).json("import a " + editionBooks.length + " edition books!");
   } catch (e) {
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
   }
 };
 
@@ -405,16 +415,16 @@ exports.deleteByIdEditionBook = async (req, res, next) => {
     await EditionBook.findByIdAndDelete(id).then((data) => {
       if (!data) {
         res
-          .status(404)
+          .status(400)
           .json({ message: `Cannot Delete with id ${id}. Maybe id is wrong` });
       } else {
-        res.json({
+        res.status(200).json({
           message: "User was deleted successfully!",
         });
       }
     });
   } catch (e) {
-    res.status(201).json(e.message);
+    res.status(400).json(e.message);
   }
 };
 
