@@ -9,10 +9,10 @@ export default class Login extends Component {
   }
   static contextType = AuthContext;
   render() {
-    const { login } = this.context;
+    const { login, error } = this.context;
     const { email, password } = this.state;
     return (
-      <form>
+      <form onSubmit={login}>
         <div className="caixa__login-input">
           <input
             type="text"
@@ -26,6 +26,7 @@ export default class Login extends Component {
         <div className="caixa__login-input">
           <input
             type="password"
+            enterKeyHint="submit"
             required
             onChange={(event) => {
               this.setState({ password: event.target.value });
@@ -40,6 +41,7 @@ export default class Login extends Component {
           <span></span>
           login
         </Link>
+        {error && <div className="error">{error}</div>}
       </form>
     );
   }

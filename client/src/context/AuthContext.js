@@ -7,7 +7,7 @@ export const AuthContext = createContext({});
 export class AuthProvider extends Component {
   constructor(props) {
     super(props);
-    this.state = { user: {} };
+    this.state = { user: {}, error: "" };
   }
 
   componentDidMount = () => {
@@ -30,9 +30,8 @@ export class AuthProvider extends Component {
       } else {
         alert("Please check your email and password");
       }
-    } catch (err) {
-      console.log(err.message);
-      alert(err.message);
+    } catch (e) {
+      this.setState({ error: e.response.data.error });
     }
   };
 
@@ -42,6 +41,7 @@ export class AuthProvider extends Component {
     try {
     } catch (e) {
       console.log(e.message);
+      this.setState({ error: e.response.data.error });
     }
   };
 
@@ -51,24 +51,21 @@ export class AuthProvider extends Component {
         .post(REGISTER_URL, {
           email: email,
           password: password,
+          repeatPassword: repeatPassword,
         })
         .then((response) => {
-          if (response.status === 200) {
-            console.log(response.data);
-          } else {
-            alert("email or password is not valid!");
-          }
+          if (response.status === 200) alert("Register successfully");
         });
     } catch (e) {
-      alert(e.message);
+      this.setState({ error: e.response.data.error });
     }
   };
 
   render() {
-    const { user } = this.state;
+    const { user, error } = this.state;
     const { login, logout, register } = this;
     return (
-      <AuthContext.Provider value={{ user, login, logout, register }}>
+      <AuthContext.Provider value={{ user, error, login, logout, register }}>
         {this.props.children}
       </AuthContext.Provider>
     );

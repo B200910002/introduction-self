@@ -9,7 +9,7 @@ export default class Register extends Component {
   }
   static contextType = AuthContext;
   render() {
-    const { register } = this.context;
+    const { register, error } = this.context;
     const { email, password, repeatPassword } = this.state;
     return (
       <form>
@@ -53,6 +53,7 @@ export default class Register extends Component {
           <span></span>
           register
         </Link>
+        {error && <div className="error">{error}</div>}
       </form>
     );
   }

@@ -12,10 +12,10 @@ connectDB();
 const API = require("./constant/api/Api");
 
 //routes
-const blockchain = require("./route/blockchainRoute");
-const grade = require("./route/gradeRoute");
-const book = require("./route/bookRoute");
-const user = require("./route/userRoute");
+const blockchainRoute = require("./route/blockchainRoute");
+const gradeRoute = require("./route/gradeRoute");
+const bookRoute = require("./route/bookRoute");
+const userRoute = require("./route/userRoute");
 
 //uses
 app.use(fileUpload());
@@ -25,10 +25,10 @@ app.use(express.json());
 app.use(cors());
 
 //use api
-app.use(API.blockchainAPI, blockchain);
-app.use(API.gradeAPI, grade);
-app.use(API.bookAPI, book);
-app.use(API.userApi, user);
+app.use(API.blockchainAPI, blockchainRoute);
+app.use(API.gradeAPI, gradeRoute);
+app.use(API.bookAPI, bookRoute);
+app.use(API.userApi, userRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(process.env.LOCAL_HOST_PORT);

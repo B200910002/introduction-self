@@ -1,39 +1,21 @@
 const { User } = require("../model/User.model");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
 
 exports.register = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
-    const newPassword = await bcrypt.hash(password, 10);
-    const response = await User.create({ email: email, password: newPassword });
-    res.status(200).json(response);
+    const { email, password, repeatPassword } = req.body;
+    const user = await User.register(email, password, repeatPassword);
+    res.status(200).json(user);
   } catch (e) {
-    res.status(405).json(e.message);
+    res.status(401).json({ error: e.message });
   }
 };
 
 exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email: email });
-
-    if (!user) {
-      // return { status: "error", error: "Invlid login" };
-      return res.send("Invalid email!");
-    }
-
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-
-    if (isPasswordValid) {
-      const token = jwt.sign({ email: user.email }, "secret123", {
-        expiresIn: "1d",
-      });
-      return res.status(200).json({ email: email, token: token });
-    } else {
-      return res.status(401).json({ status: "error", token: false });
-    }
+    const token = await User.login(email, password);
+    res.status(200).json({ email, token });
   } catch (e) {
-    res.status(401).json(e.message);
+    res.status(401).json({ error: e.message });
   }
 };
