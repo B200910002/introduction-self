@@ -12,54 +12,48 @@ export default class Register extends Component {
     const { register } = this.context;
     const { email, password, repeatPassword } = this.state;
     return (
-      <>
-        {!localStorage.getItem("token") ? (
-          <form>
-            <div className="caixa__login-input">
-              <input
-                type="text"
-                required
-                onChange={(event) => {
-                  this.setState({ email: event.target.value });
-                }}
-              />
-              <label>Email</label>
-            </div>
-            <div className="caixa__login-input">
-              <input
-                type="password"
-                required
-                onChange={(event) => {
-                  this.setState({ password: event.target.value });
-                }}
-              />
-              <label>Password</label>
-            </div>
-            <div className="caixa__login-input">
-              <input
-                type="password"
-                required
-                onChange={(event) => {
-                  this.setState({ repeatPassword: event.target.value });
-                }}
-              />
-              <label>Repeat-password</label>
-            </div>
-            <Link
-              className="a"
-              onClick={() => register(email, password, repeatPassword)}
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              register
-            </Link>
-          </form>
-        ) : (
-          <>{(window.location.href = "/")}</>
-        )}
-      </>
+      <form>
+        <div className="caixa__login-input">
+          <input
+            type="text"
+            required
+            onChange={(event) => {
+              this.setState({ email: event.target.value });
+            }}
+          />
+          <label>Email</label>
+        </div>
+        <div className="caixa__login-input">
+          <input
+            type="password"
+            required
+            onChange={(event) => {
+              this.setState({ password: event.target.value });
+            }}
+          />
+          <label>Password</label>
+        </div>
+        <div className="caixa__login-input">
+          <input
+            type="password"
+            required
+            onChange={(event) => {
+              this.setState({ repeatPassword: event.target.value });
+            }}
+          />
+          <label>Repeat-password</label>
+        </div>
+        <Link
+          className="a"
+          onClick={() => register(email, password, repeatPassword)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          register
+        </Link>
+      </form>
     );
   }
 }
