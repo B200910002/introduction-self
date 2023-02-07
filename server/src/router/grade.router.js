@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const gradeCtrl = require("../controller/grade.control");
+const gradeCtrl = require("../controller/grade.controller");
 
 //get
 router.get("/", gradeCtrl.getAll);
